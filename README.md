@@ -238,4 +238,4 @@ Frontend-от е PWA — корисниците можат да го „инст
 
 ## Лиценца
 
-MIT. Користи го слободно.
+Pazarkoski. All rights reserved.
