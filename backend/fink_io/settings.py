@@ -21,6 +21,9 @@ ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['localhost', '127.0.0.1', '.o
 
 # Application definition
 INSTALLED_APPS = [
+    # Daphne (must be FIRST so runserver uses ASGI)
+    'daphne',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -32,6 +35,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'corsheaders',
+    'channels',
 
     # Local apps
     'apps.accounts',
@@ -40,6 +44,8 @@ INSTALLED_APPS = [
     'apps.moderation',
     'apps.ai_service',
     'apps.analytics',
+    'apps.notifications',
+    'apps.chat',
 ]
 
 MIDDLEWARE = [
@@ -73,6 +79,15 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'fink_io.wsgi.application'
+ASGI_APPLICATION = 'fink_io.asgi.application'
+
+# Channels (WebSocket) - in-memory layer for dev.
+# For production, switch to channels-redis with REDIS_URL.
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels.layers.InMemoryChannelLayer',
+    },
+}
 
 # Database
 DATABASES = {
@@ -124,8 +139,8 @@ REST_FRAMEWORK = {
 # JWT
 from datetime import timedelta
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(hours=1),
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=7),
+    'ACCESS_TOKEN_LIFETIME': timedelta(days=1),    # 24h - safer for long AI requests
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=30),  # 30 days
     'ROTATE_REFRESH_TOKENS': True,
 }
 

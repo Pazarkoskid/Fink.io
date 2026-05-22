@@ -98,6 +98,24 @@ export const authApi = {
   searchUsers: (q) => api.get('/accounts/search/', { params: { q } }),
 }
 
+// === Notifications ===
+export const notificationsApi = {
+  list: (unread = false) => api.get('/notifications/', { params: unread ? { unread: 1 } : {} }),
+  count: () => api.get('/notifications/count/'),
+  markRead: (id) => api.post(`/notifications/${id}/read/`),
+  markAllRead: () => api.post('/notifications/read-all/'),
+}
+
+// === Chat ===
+export const chatApi = {
+  conversations: () => api.get('/chat/conversations/'),
+  startConversation: (userId) => api.post('/chat/conversations/start/', { user_id: userId }),
+  messages: (convId) => api.get(`/chat/conversations/${convId}/messages/`),
+  markRead: (convId) => api.post(`/chat/conversations/${convId}/read/`),
+  unreadCount: () => api.get('/chat/unread-count/'),
+  onlineFriends: () => api.get('/chat/online-friends/'),
+}
+
 // === Subjects ===
 export const subjectsApi = {
   list: (params) => api.get('/materials/subjects/', { params }),

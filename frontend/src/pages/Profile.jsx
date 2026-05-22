@@ -20,6 +20,7 @@ export default function Profile() {
   const [form, setForm] = useState({
     username: '', bio: '', preferred_language: 'mk',
     current_year: '', study_program: '',
+    status_label: '', status_emoji: '',
   })
   const [avatarPreview, setAvatarPreview] = useState(null)
   const [avatarFile, setAvatarFile] = useState(null)
@@ -40,6 +41,8 @@ export default function Profile() {
         preferred_language: user.preferred_language || 'mk',
         current_year: user.current_year || '',
         study_program: user.study_program || '',
+        status_label: user.status_label || '',
+        status_emoji: user.status_emoji || '',
       })
       setAvatarPreview(user.avatar || null)
     }
@@ -75,7 +78,6 @@ export default function Profile() {
     setSavedMsg('')
     try {
       if (avatarFile) {
-        // Multipart upload with all fields
         const fd = new FormData()
         fd.append('username', form.username)
         fd.append('bio', form.bio)
@@ -83,6 +85,8 @@ export default function Profile() {
         if (form.current_year) fd.append('current_year', form.current_year)
         else fd.append('current_year', '')
         fd.append('study_program', form.study_program)
+        fd.append('status_label', form.status_label)
+        fd.append('status_emoji', form.status_emoji)
         fd.append('avatar', avatarFile)
         await authApi.updateMe(fd)
         setAvatarFile(null)
@@ -268,6 +272,16 @@ export default function Profile() {
             </div>
           </div>
 
+          {/* Status picker */}
+          <div>
+            <label className="label">Што правиш сега? (Статус)</label>
+            <StatusPicker
+              value={form.status_label}
+              emoji={form.status_emoji}
+              onChange={(label, emoji) => setForm({ ...form, status_label: label, status_emoji: emoji })}
+            />
+          </div>
+
           <div>
             <label className="label">Е-маил</label>
             <input className="input" value={user.email} disabled />
@@ -342,7 +356,7 @@ export default function Profile() {
                   className="badge hover:bg-accent hover:text-white hover:border-accent flex items-center gap-1 transition-colors"
                   title={`Сем. ${s.semester}`}
                 >
-                  <Plus size={11} /> {s.code} {s.name.length > 22 ? s.name.slice(0, 22) + '…' : s.name}
+                  <Plus size={11} /> {s.name.length > 28 ? s.name.slice(0, 28) + '…' : s.name}
                 </button>
               ))}
             </div>
@@ -364,9 +378,8 @@ export default function Profile() {
               >
                 <span className="text-xl shrink-0">{t.subject_icon || '📘'}</span>
                 <div className="flex-1 min-w-0">
-                  <p className="text-xs font-mono text-muted">{t.subject_code}</p>
                   <p className="font-display text-sm truncate">{t.subject_name}</p>
-                  <p className="text-[10px] font-mono text-subtle">
+                  <p className="text-[10px] font-mono text-muted">
                     Година {t.subject_year} · Сем. {t.subject_semester}
                   </p>
                 </div>
@@ -440,8 +453,8 @@ function MyMaterialRow({ material, onDelete }) {
       <div className="flex-1 min-w-0">
         <p className="font-display text-sm leading-tight truncate">{material.title}</p>
         <div className="flex flex-wrap items-center gap-2 mt-1 text-[10px] font-mono text-subtle">
-          {material.subject_code && (
-            <span>{material.subject_code}</span>
+          {material.subject_name && (
+            <span>{material.subject_name.length > 20 ? material.subject_name.slice(0, 20) + '…' : material.subject_name}</span>
           )}
           <span>{material.extension?.replace('.', '').toUpperCase()}</span>
           <span>{(material.file_size / 1024).toFixed(0)} KB</span>
@@ -546,7 +559,7 @@ function AddSubjectControl({ allSubjects, takenIds, onAdd }) {
           <div key={s.id} className="flex items-center gap-2 py-1.5 px-2 rounded-lg hover:bg-fg/5">
             <span className="text-base">{s.icon || '📘'}</span>
             <div className="flex-1 min-w-0">
-              <p className="text-xs font-mono text-muted">{s.code} · Год.{s.year} Сем.{s.semester}</p>
+              <p className="text-xs font-mono text-muted">Год.{s.year} · Сем.{s.semester}</p>
               <p className="text-sm truncate">{s.name}</p>
             </div>
             <button
@@ -566,6 +579,44 @@ function AddSubjectControl({ allSubjects, takenIds, onAdd }) {
           </div>
         ))}
       </div>
+    </div>
+  )
+}
+
+
+const STATUS_OPTIONS = [
+  { label: '', emoji: '', display: 'Без статус' },
+  { label: 'Online', emoji: '🟢', display: 'Online' },
+  { label: 'Chilling', emoji: '😎', display: 'Chilling' },
+  { label: 'Study', emoji: '📚', display: 'Study' },
+  { label: 'Busy', emoji: '🔥', display: 'Busy' },
+  { label: 'Sleeping', emoji: '😴', display: 'Sleeping' },
+  { label: 'Gaming', emoji: '🎮', display: 'Gaming' },
+  { label: 'Coffee', emoji: '☕', display: 'Coffee' },
+  { label: 'Coding', emoji: '💻', display: 'Coding' },
+  { label: 'Exam', emoji: '📝', display: 'Exam time' },
+]
+
+function StatusPicker({ value, emoji, onChange }) {
+  return (
+    <div className="flex flex-wrap gap-2">
+      {STATUS_OPTIONS.map((s, i) => {
+        const active = value === s.label && emoji === s.emoji
+        return (
+          <button
+            key={i}
+            type="button"
+            onClick={() => onChange(s.label, s.emoji)}
+            className={`px-3 py-1.5 rounded-xl border text-sm transition-colors flex items-center gap-1.5
+              ${active
+                ? 'bg-accent text-white border-accent'
+                : 'border-border hover:border-fg/30 bg-surface'}`}
+          >
+            {s.emoji && <span>{s.emoji}</span>}
+            <span>{s.display}</span>
+          </button>
+        )
+      })}
     </div>
   )
 }

@@ -174,7 +174,7 @@ export default function Databases() {
               <option value="">Сите предмети</option>
               {filteredSubjects.map((s) => (
                 <option key={s.id} value={s.id}>
-                  {s.code ? `${s.code} — ` : ''}{s.name}
+                  {s.name}
                 </option>
               ))}
             </select>
@@ -286,8 +286,10 @@ function DatabaseCard({ material }) {
         <span className="text-4xl shrink-0">{fileIcon}</span>
         <div className="flex-1 min-w-0">
           <div className="flex flex-wrap gap-1 mb-1">
-            {material.subject_code && (
-              <span className="badge text-[9px]">{material.subject_code}</span>
+            {material.subject_name && (
+              <span className="badge text-[9px]">
+                {material.subject_name.length > 24 ? material.subject_name.slice(0, 24) + '…' : material.subject_name}
+              </span>
             )}
             {material.semester && (
               <span className="badge text-[9px]">Сем. {material.semester}</span>

@@ -5,6 +5,7 @@ import {
   Trophy, Flame, Target, Award, BookOpen, Calendar, ArrowLeft,
   Lock, Clock, Check, Database, Download, Heart, FileText,
   UserPlus, UserCheck, UserMinus, X, Loader2, Bookmark,
+  MessageSquare,
 } from 'lucide-react'
 import { authApi, materialsApi } from '../lib/api'
 import { useAuth } from '../lib/auth'
@@ -192,6 +193,13 @@ export default function UserProfile() {
 
             <h1 className="font-display text-4xl font-semibold mb-1 text-white">{user.username}</h1>
 
+            {user.status_label && (
+              <p className="text-sm font-medium text-accent mb-1">
+                {user.status_emoji && <span className="mr-1">{user.status_emoji}</span>}
+                {user.status_label}
+              </p>
+            )}
+
             {user.study_program && (
               <p className="text-sm text-white/80 mb-2">
                 <BookOpen size={12} className="inline mr-1" /> {user.study_program}
@@ -217,15 +225,23 @@ export default function UserProfile() {
             </div>
           </div>
 
-          {/* Friend action button */}
+          {/* Friend + chat action buttons */}
           {me && me.id !== user.id && (
-            <div className="shrink-0">
+            <div className="shrink-0 flex flex-col gap-2">
               <FriendButton
                 status={friendship_status}
                 loading={friendActionLoading}
                 onSend={sendRequest}
                 onRemove={removeFriend}
               />
+              {friendship_status === 'friends' && (
+                <Link
+                  to={`/messages?with=${user.id}`}
+                  className="btn-secondary !bg-white/10 !text-white !border-white/20 hover:!bg-accent hover:!border-accent"
+                >
+                  <MessageSquare size={14} /> Порака
+                </Link>
+              )}
             </div>
           )}
         </div>
@@ -495,8 +511,10 @@ function MaterialCard({ material }) {
         <span className="text-3xl shrink-0">{icon}</span>
         <div className="flex-1 min-w-0">
           <div className="flex flex-wrap gap-1 mb-1">
-            {material.subject_code && (
-              <span className="badge text-[9px]">{material.subject_code}</span>
+            {material.subject_name && (
+              <span className="badge text-[9px]">
+                {material.subject_name.length > 22 ? material.subject_name.slice(0, 22) + '…' : material.subject_name}
+              </span>
             )}
             <span className="badge text-[9px]">
               {material.extension?.replace('.', '').toUpperCase()}
@@ -565,9 +583,6 @@ function SubjectList({ subjects }) {
         >
           <span className="text-xl shrink-0">{s.subject_icon || '📘'}</span>
           <div className="min-w-0 flex-1">
-            <p className="text-xs font-mono text-muted truncate">
-              {s.subject_code || s.code}
-            </p>
             <p className="font-display text-sm leading-tight truncate">
               {s.subject_name || s.name}
             </p>

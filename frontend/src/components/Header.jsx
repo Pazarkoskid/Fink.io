@@ -3,11 +3,13 @@ import { NavLink, Link, useNavigate } from 'react-router-dom'
 import {
   Menu, X, User, LogOut, Upload, Shield, GraduationCap,
   Trophy, Crown, BookmarkCheck, ChevronDown, Database, Plus, Users,
+  MessageSquare,
 } from 'lucide-react'
 import { useAuth } from '../lib/auth'
-import { authApi } from '../lib/api'
 import ThemeToggle from './ThemeToggle'
 import Logo from './Logo'
+import NotificationBell from './NotificationBell'
+import ChatBadge from './ChatBadge'
 
 const navLinks = [
   { to: '/', label: 'Почетна', end: true },
@@ -27,7 +29,6 @@ export default function Header() {
   const isAdmin = useAuth((s) => s.isAdmin())
   const [mobileOpen, setMobileOpen] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
-  const [friendRequestCount, setFriendRequestCount] = useState(0)
   const menuRef = useRef(null)
 
   // Close user menu when clicking outside
@@ -40,23 +41,6 @@ export default function Header() {
     if (menuOpen) document.addEventListener('mousedown', handler)
     return () => document.removeEventListener('mousedown', handler)
   }, [menuOpen])
-
-  // Poll friend request count for logged-in user
-  useEffect(() => {
-    if (!user) {
-      setFriendRequestCount(0)
-      return
-    }
-    let cancelled = false
-    const fetch = () => {
-      authApi.myFriendRequests().then((r) => {
-        if (!cancelled) setFriendRequestCount(r.data.received_count || 0)
-      }).catch(() => {})
-    }
-    fetch()
-    const id = setInterval(fetch, 60000)  // refresh every minute
-    return () => { cancelled = true; clearInterval(id) }
-  }, [user])
 
   const handleLogout = () => {
     logout()
@@ -107,25 +91,22 @@ export default function Header() {
           </nav>
 
           {/* Right side */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1">
             <ThemeToggle compact />
+            {user && <ChatBadge />}
+            {user && <NotificationBell />}
 
             {user ? (
               <div className="relative" ref={menuRef}>
                 <button
                   onClick={() => setMenuOpen(!menuOpen)}
-                  className="flex items-center gap-2 p-1.5 pr-3 rounded-xl hover:bg-fg/5 transition-colors relative"
+                  className="flex items-center gap-2 p-1.5 pr-3 rounded-xl hover:bg-fg/5 transition-colors"
                 >
-                  <div className="w-8 h-8 rounded-lg overflow-hidden bg-gradient-to-br from-accent to-accent-dark flex items-center justify-center text-white font-bold text-sm shrink-0 relative">
+                  <div className="w-8 h-8 rounded-lg overflow-hidden bg-gradient-to-br from-accent to-accent-dark flex items-center justify-center text-white font-bold text-sm shrink-0">
                     {user.avatar ? (
                       <img src={user.avatar} alt="" className="w-full h-full object-cover" />
                     ) : (
                       <span>{user.username?.[0]?.toUpperCase() || 'U'}</span>
-                    )}
-                    {friendRequestCount > 0 && (
-                      <span className="absolute -top-1 -right-1 bg-accent text-white text-[9px] font-bold rounded-full min-w-[16px] h-4 px-1 flex items-center justify-center border-2 border-bg">
-                        {friendRequestCount > 9 ? '9+' : friendRequestCount}
-                      </span>
                     )}
                   </div>
                   <span className="hidden sm:inline text-sm font-medium">
@@ -166,9 +147,15 @@ export default function Header() {
                         to="/friends"
                         icon={Users}
                         onClick={() => setMenuOpen(false)}
-                        badge={friendRequestCount}
                       >
                         Пријатели
+                      </MenuItem>
+                      <MenuItem
+                        to="/messages"
+                        icon={MessageSquare}
+                        onClick={() => setMenuOpen(false)}
+                      >
+                        Пораки
                       </MenuItem>
                       <MenuItem to="/my-quizzes" icon={BookmarkCheck} onClick={() => setMenuOpen(false)}>
                         Мои квизови
@@ -268,7 +255,7 @@ export default function Header() {
   )
 }
 
-function MenuItem({ to, icon: Icon, children, onClick, badge }) {
+function MenuItem({ to, icon: Icon, children, onClick }) {
   return (
     <Link
       to={to}
@@ -276,12 +263,7 @@ function MenuItem({ to, icon: Icon, children, onClick, badge }) {
       className="flex items-center gap-2.5 px-3 py-2 text-sm rounded-lg hover:bg-fg/5 transition-colors"
     >
       <Icon size={15} className="text-muted" />
-      <span className="flex-1">{children}</span>
-      {badge > 0 && (
-        <span className="bg-accent text-white text-[9px] font-bold rounded-full min-w-[18px] h-[18px] px-1 flex items-center justify-center">
-          {badge > 9 ? '9+' : badge}
-        </span>
-      )}
+      <span>{children}</span>
     </Link>
   )
 }

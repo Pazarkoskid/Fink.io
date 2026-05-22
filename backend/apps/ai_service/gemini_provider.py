@@ -109,6 +109,7 @@ class GeminiQuizGenerator(BaseQuizGenerator):
 
     def generate(self, request: GenerationRequest) -> GenerationResult:
         import logging
+        import time
         logger = logging.getLogger(__name__)
 
         # Gemini Flash-Lite has 1M token context, no need to truncate aggressively
@@ -132,19 +133,61 @@ class GeminiQuizGenerator(BaseQuizGenerator):
 
         # Use response_mime_type to force JSON output - Gemini supports this natively
         from google.genai import types
-        try:
-            response = self.client.models.generate_content(
-                model=self.model,
-                contents=full_prompt,
-                config=types.GenerateContentConfig(
-                    response_mime_type="application/json",
-                    temperature=0.7,
-                    max_output_tokens=8000,
-                ),
-            )
-        except Exception as e:
-            logger.error(f"[Gemini] API call failed: {e}")
-            raise RuntimeError(f"Gemini API повик не успеа: {str(e)[:200]}")
+        config = types.GenerateContentConfig(
+            response_mime_type="application/json",
+            temperature=0.7,
+            max_output_tokens=8000,
+        )
+
+        # Try primary model, then fallbacks if overloaded
+        models_to_try = [
+            self.model,
+            'gemini-2.5-flash',       # bigger but more reliable
+            'gemini-2.0-flash',       # stable older
+            'gemini-1.5-flash',       # very stable older
+        ]
+        # Dedupe while preserving order
+        seen = set()
+        models_to_try = [m for m in models_to_try if not (m in seen or seen.add(m))]
+
+        response = None
+        last_err = None
+        for model_name in models_to_try:
+            # Each model gets 2 attempts with exponential backoff
+            for attempt in range(2):
+                try:
+                    logger.info(f"[Gemini] try {model_name} (attempt {attempt + 1})")
+                    response = self.client.models.generate_content(
+                        model=model_name,
+                        contents=full_prompt,
+                        config=config,
+                    )
+                    logger.info(f"[Gemini] success with {model_name}")
+                    break
+                except Exception as e:
+                    err_str = str(e)
+                    last_err = err_str
+                    logger.warning(f"[Gemini] {model_name} attempt {attempt + 1} failed: {err_str[:200]}")
+                    # If 503 / overloaded - wait and retry
+                    if '503' in err_str or 'UNAVAILABLE' in err_str.upper() or 'overloaded' in err_str.lower():
+                        if attempt == 0:
+                            time.sleep(2)  # brief wait before retry
+                            continue
+                        else:
+                            break  # next model
+                    # Other errors (auth, quota) - don't retry this model
+                    break
+            if response is not None:
+                break
+
+        if response is None:
+            # All models failed
+            if '503' in (last_err or '') or 'overloaded' in (last_err or '').lower():
+                raise RuntimeError(
+                    "Google Gemini е презафатен во моментот. Сите алтернативни модели исто. "
+                    "Обиди се повторно за 1-2 минути."
+                )
+            raise RuntimeError(f"Сите Gemini модели не успеаја: {str(last_err)[:200]}")
 
         raw = (response.text or '').strip()
         if not raw:

@@ -12,10 +12,10 @@ export default function QuizCard({ quiz }) {
       <div className="relative">
         <div className="flex items-start justify-between gap-3 mb-3">
           <div className="flex flex-wrap gap-1.5">
-            {quiz.subject_code ? (
+            {quiz.subject_name ? (
               <span className="badge gap-1">
                 <BookOpen size={10} />
-                {quiz.subject_code}
+                {quiz.subject_name.length > 28 ? quiz.subject_name.slice(0, 28) + '…' : quiz.subject_name}
               </span>
             ) : (
               <span className="badge">Без предмет</span>

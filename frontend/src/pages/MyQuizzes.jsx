@@ -201,7 +201,7 @@ export default function MyQuizzes() {
               <option value="">Сите предмети</option>
               {filteredSubjects.map(s => (
                 <option key={s.id} value={s.id}>
-                  {s.code} — {s.name}
+                  {s.name}
                 </option>
               ))}
             </select>
@@ -297,8 +297,10 @@ function QuizRow({ quiz, tab, onDelete, onUnsave }) {
           {tab === 'saved' && quiz.author_username && (
             <span className="badge">од {quiz.author_username}</span>
           )}
-          {quiz.subject_code && (
-            <span className="badge font-mono text-[9px]">{quiz.subject_code}</span>
+          {quiz.subject_name && (
+            <span className="badge font-mono text-[9px]">
+              {quiz.subject_name.length > 20 ? quiz.subject_name.slice(0, 20) + '…' : quiz.subject_name}
+            </span>
           )}
           {quiz.semester && (
             <span className="badge">Сем. {quiz.semester}</span>

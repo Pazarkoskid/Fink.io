@@ -289,7 +289,7 @@ export default function CreateQuiz() {
                   .filter(s => !semester || String(s.semester) === semester)
                   .map(s => (
                     <option key={s.id} value={s.id}>
-                      {s.code} — {s.name}
+                      {s.name}
                     </option>
                   ))}
               </select>

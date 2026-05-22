@@ -1,15 +1,41 @@
+# Tested with Python 3.11 - 3.14
+# Pinned to versions that have pre-built wheels for modern Python
+
+# --- Django stack ---
 Django>=5.1,<5.3
 djangorestframework>=3.15.2
 djangorestframework-simplejwt>=5.3.1
 django-cors-headers>=4.4.0
 django-environ>=0.11.2
 dj-database-url>=2.2.0
+
+# --- Database ---
+# psycopg2-binary 2.9.10+ has wheels for Python 3.13
 psycopg2-binary>=2.9.10
+
+# --- Images ---
+# Pillow 11.0.0+ has wheels for Python 3.13
 Pillow>=11.0.0
+
+# --- Server ---
 gunicorn>=22.0.0
 whitenoise>=6.7.0
+
+# --- WebSockets (chat) ---
+channels>=4.1.0
+daphne>=4.1.2
+
+# --- AI Providers ---
+# Google Gemini (free tier - default)
 google-genai>=1.0.0
+# Anthropic Claude (paid - optional)
 anthropic>=0.34.0
+
+# --- Text extraction ---
 pypdf>=4.3.0
 python-docx>=1.1.2
 python-pptx>=1.0.0
+
+# --- Optional: async tasks (not used in MVP but ready) ---
+# celery>=5.4.0
+# redis>=5.0.4

@@ -13,8 +13,10 @@ export default function Upload() {
   // Step 1
   const [file, setFile] = useState(null)
   const [title, setTitle] = useState('')
+  const [description, setDescription] = useState('')
   const [subject, setSubject] = useState('')
   const [semester, setSemester] = useState('')
+  const [visibility, setVisibility] = useState('public')
   const [subjects, setSubjects] = useState([])
   const [uploadingMsg, setUploadingMsg] = useState('')
   const [error, setError] = useState('')
@@ -64,8 +66,10 @@ export default function Upload() {
       const fd = new FormData()
       fd.append('file', file)
       fd.append('title', title)
+      if (description) fd.append('description', description)
       if (subject) fd.append('subject', subject)
       if (semester) fd.append('semester', semester)
+      fd.append('visibility', visibility)
       const { data } = await materialsApi.upload(fd)
       if (data.status === 'failed') {
         setError(`Извлекувањето на текст не успеа: ${data.extraction_error || 'непознат проблем'}`)
@@ -100,6 +104,13 @@ export default function Upload() {
     setError('')
     setStep(3)
     try {
+      console.log('[Generate] sending request...', {
+        material_id: material.id,
+        num_questions: numQuestions,
+        n_quizzes: nQuizzes,
+        question_types: questionTypes,
+        difficulty,
+      })
       const { data } = await quizzesApi.generate({
         material_id: material.id,
         num_questions: numQuestions,
@@ -108,29 +119,50 @@ export default function Upload() {
         difficulty,
         extra_instructions: extra,
       })
+      console.log('[Generate] response:', data)
+
       if (!data || data.length === 0) {
-        navigate('/my-quizzes')
+        setError('AI не врати квизови. Обиди се повторно или со помал материјал.')
+        setStep(2)
         return
       }
       // If multiple quizzes, take the user to My Quizzes so they see all drafts
       if (data.length > 1) {
         navigate('/my-quizzes?tab=created&status=draft')
       } else {
-        // Single quiz - go straight to edit
         navigate(`/quiz/${data[0].id}/edit`)
       }
     } catch (e) {
-      setError(e.response?.data?.detail || 'Генерацијата не успеа.')
+      console.error('[Generate] error:', e)
+      const detail = e.response?.data?.detail
+      const status = e.response?.status
+      let msg
+      if (status === 401) {
+        msg = 'Сесијата истече. Логирај се повторно и обиди се одново.'
+      } else if (status === 403) {
+        msg = 'Немаш дозвола. Само инструктори можат да генерираат квизови.'
+      } else if (status === 502 || status === 503) {
+        msg = `AI услугата има проблем: ${detail || 'обиди се повторно за момент'}`
+      } else if (status === 400) {
+        msg = detail || 'Невалидни параметри.'
+      } else {
+        msg = detail || `Генерацијата не успеа (status ${status || 'непознат'}). Провери конзола за повеќе.`
+      }
+      setError(msg)
       setStep(2)
     }
   }
 
   return (
     <div className="container-app py-10 max-w-3xl">
-      <p className="font-mono text-xs uppercase tracking-widest text-ink-600 mb-2">
-        Создавање квиз
+      <p className="font-mono text-xs uppercase tracking-widest text-muted mb-2">
+        Прикачи материјал
       </p>
-      <h1 className="font-display text-4xl mb-8">Прикачи материјал</h1>
+      <h1 className="font-display text-4xl mb-2">Нова база на знаење</h1>
+      <p className="text-muted mb-8">
+        Прикачи учебен материјал — потоа избери дали само да го зачуваш како база,
+        или AI да генерира квиз од него.
+      </p>
 
       {/* Stepper */}
       <div className="flex items-center gap-2 mb-10 font-mono text-xs uppercase tracking-widest">
@@ -371,9 +403,19 @@ export default function Upload() {
             </div>
           )}
 
-          <div className="flex gap-3">
+          <div className="flex flex-col sm:flex-row gap-3">
             <button onClick={() => setStep(1)} className="btn-secondary">
               ← Назад
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                // Just keep the material - skip quiz generation
+                navigate('/databases?ordering=-created_at')
+              }}
+              className="btn-secondary flex-1"
+            >
+              <FileText size={16} /> Само зачувај како база
             </button>
             <button onClick={generate} className="btn-accent flex-1">
               <Sparkles size={16} /> Генерирај квиз

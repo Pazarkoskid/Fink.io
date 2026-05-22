@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import {
   Users, UserPlus, Check, X, Search, Loader2, Mail, Clock,
 } from 'lucide-react'
-import { authApi } from '../lib/api'
+import { authApi, chatApi } from '../lib/api'
 
 export default function Friends() {
   const [tab, setTab] = useState('all')  // all | received | sent | search
@@ -11,6 +11,19 @@ export default function Friends() {
   const [friends, setFriends] = useState([])
   const [me, setMe] = useState(null)
   const [loading, setLoading] = useState(true)
+  const [onlineFriends, setOnlineFriends] = useState(new Set())
+
+  // Poll online status every 30s
+  useEffect(() => {
+    const fetchOnline = () => {
+      chatApi.onlineFriends().then(({ data }) => {
+        setOnlineFriends(new Set(data.online || []))
+      }).catch(() => {})
+    }
+    fetchOnline()
+    const id = setInterval(fetchOnline, 30000)
+    return () => clearInterval(id)
+  }, [])
 
   const load = useCallback(async () => {
     setLoading(true)
@@ -34,6 +47,8 @@ export default function Friends() {
     try {
       await authApi.respondFriendRequest(requestId, 'accept')
       load()
+      // Trigger bell to re-fetch
+      window.dispatchEvent(new CustomEvent('finkio:notifications-changed'))
     } catch (e) { alert('Грешка.') }
   }
 
@@ -41,6 +56,7 @@ export default function Friends() {
     try {
       await authApi.respondFriendRequest(requestId, 'reject')
       load()
+      window.dispatchEvent(new CustomEvent('finkio:notifications-changed'))
     } catch (e) { alert('Грешка.') }
   }
 
@@ -116,11 +132,53 @@ export default function Friends() {
             ctaLabel="Додај нов пријател"
           />
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            {friends.map(f => (
-              <FriendCard key={f.id} user={f} onRemove={() => removeFriend(f.id)} />
-            ))}
-          </div>
+          <>
+            {(() => {
+              const online = friends.filter(f => onlineFriends.has(f.id))
+              const offline = friends.filter(f => !onlineFriends.has(f.id))
+              return (
+                <>
+                  {online.length > 0 && (
+                    <div className="mb-5">
+                      <p className="font-mono text-xs uppercase tracking-widest text-muted mb-3 flex items-center gap-1.5">
+                        <span className="w-2 h-2 rounded-full bg-green-500" />
+                        Онлајн сега ({online.length})
+                      </p>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        {online.map(f => (
+                          <FriendCard
+                            key={f.id}
+                            user={f}
+                            online
+                            onRemove={() => removeFriend(f.id)}
+                          />
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                  {offline.length > 0 && (
+                    <div>
+                      {online.length > 0 && (
+                        <p className="font-mono text-xs uppercase tracking-widest text-muted mb-3">
+                          Офлајн ({offline.length})
+                        </p>
+                      )}
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        {offline.map(f => (
+                          <FriendCard
+                            key={f.id}
+                            user={f}
+                            online={false}
+                            onRemove={() => removeFriend(f.id)}
+                          />
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </>
+              )
+            })()}
+          </>
         )
       ) : tab === 'received' ? (
         requests.received.length === 0 ? (
@@ -161,11 +219,14 @@ export default function Friends() {
   )
 }
 
-function FriendCard({ user, onRemove }) {
+function FriendCard({ user, online, onRemove }) {
   return (
     <div className="card !p-4 flex items-center gap-3">
-      <Link to={`/users/${user.id}`} className="shrink-0">
+      <Link to={`/users/${user.id}`} className="shrink-0 relative">
         <Avatar user={user} size={48} />
+        {online && (
+          <span className="absolute bottom-0 right-0 w-3.5 h-3.5 bg-green-500 rounded-full border-2 border-bg" />
+        )}
       </Link>
       <div className="flex-1 min-w-0">
         <Link to={`/users/${user.id}`} className="font-display text-base hover:text-accent transition-colors block truncate">
@@ -174,8 +235,20 @@ function FriendCard({ user, onRemove }) {
         {user.study_program && (
           <p className="text-xs text-muted truncate">{user.study_program}</p>
         )}
-        <span className="badge-soft text-[9px] mt-0.5 inline-flex">{user.role}</span>
+        <div className="flex items-center gap-2 mt-0.5">
+          <span className="badge-soft text-[9px]">{user.role}</span>
+          {online && (
+            <span className="text-[10px] font-medium text-green-600 dark:text-green-400">● Онлајн</span>
+          )}
+        </div>
       </div>
+      <Link
+        to={`/messages?with=${user.id}`}
+        className="btn-secondary !py-1.5 !px-2 text-[10px] shrink-0"
+        title="Порака"
+      >
+        💬
+      </Link>
       <button
         onClick={onRemove}
         className="btn-secondary !py-1 !px-2 text-[10px] shrink-0"

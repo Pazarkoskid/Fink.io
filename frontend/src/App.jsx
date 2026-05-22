@@ -23,6 +23,7 @@ import QuizAnalytics from './pages/QuizAnalytics'
 import AdminPanel from './pages/AdminPanel'
 import UserProfile from './pages/UserProfile'
 import Friends from './pages/Friends'
+import Messages from './pages/Messages'
 import Databases from './pages/Databases'
 import Help from './pages/Help'
 import NotFound from './pages/NotFound'
@@ -65,6 +66,7 @@ export default function App() {
         <Route element={<RequireAuth />}>
           <Route path="profile" element={<Profile />} />
           <Route path="friends" element={<Friends />} />
+          <Route path="messages" element={<Messages />} />
           <Route path="my-quizzes" element={<MyQuizzes />} />
           <Route path="upload" element={<Upload />} />
           <Route path="create-quiz" element={<CreateQuiz />} />

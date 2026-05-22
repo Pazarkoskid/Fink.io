@@ -27,7 +27,13 @@ export default function Search() {
 
   // Load subjects (cached)
   useEffect(() => {
-    subjectsApi.list().then((r) => setSubjects(r.data.results || r.data || []))
+    subjectsApi.list().then((r) => {
+      const list = r.data.results || r.data || []
+      console.log('[Search] loaded subjects:', list.length, 'first:', list[0])
+      setSubjects(list)
+    }).catch((e) => {
+      console.error('[Search] subjects load failed:', e.response?.status, e.message)
+    })
   }, [])
 
   // Subjects filtered by current year/semester selection
@@ -159,7 +165,7 @@ export default function Search() {
               <option value="">Сите предмети</option>
               {filteredSubjects.map((s) => (
                 <option key={s.id} value={s.id}>
-                  {s.code ? `${s.code} — ` : ''}{s.name}
+                  {s.name}
                 </option>
               ))}
             </select>

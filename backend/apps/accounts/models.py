@@ -34,6 +34,14 @@ class User(AbstractUser):
         max_length=100, blank=True,
         help_text='На пр. „Софтверско инженерство и информациски системи"'
     )
+    status_label = models.CharField(
+        max_length=50, blank=True,
+        help_text='Кратки статус-зборови — chilling, study, sleeping...'
+    )
+    status_emoji = models.CharField(
+        max_length=10, blank=True,
+        help_text='Опционален emoji за статусот'
+    )
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

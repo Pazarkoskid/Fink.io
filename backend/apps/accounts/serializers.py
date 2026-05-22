@@ -30,6 +30,7 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = ['id', 'username', 'email', 'role', 'bio', 'avatar',
                   'preferred_language', 'current_year', 'study_program',
+                  'status_label', 'status_emoji',
                   'created_at']
         read_only_fields = ['id', 'role', 'created_at']
 
@@ -41,7 +42,9 @@ class PublicUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['id', 'username', 'role', 'bio', 'avatar',
-                  'current_year', 'study_program', 'created_at']
+                  'current_year', 'study_program',
+                  'status_label', 'status_emoji',
+                  'created_at']
         read_only_fields = fields
 
     def get_avatar(self, obj):
@@ -92,4 +95,5 @@ class UserUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['username', 'bio', 'avatar', 'preferred_language',
-                  'current_year', 'study_program']
+                  'current_year', 'study_program',
+                  'status_label', 'status_emoji']
