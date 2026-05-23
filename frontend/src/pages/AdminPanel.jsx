@@ -26,7 +26,7 @@ export default function AdminPanel() {
     <div className="container-app py-10">
       <div className="flex items-baseline justify-between mb-8">
         <div>
-          <p className="font-mono text-xs uppercase tracking-widest text-ink-600 mb-1 flex items-center gap-2">
+          <p className="font-mono text-xs uppercase tracking-widest text-muted mb-1 flex items-center gap-2">
             <Crown size={12} /> Администратор
           </p>
           <h1 className="font-display text-4xl">Контролна табла</h1>
@@ -34,7 +34,7 @@ export default function AdminPanel() {
       </div>
 
       {/* Tabs */}
-      <div className="flex border-b-2 border-ink-900 mb-8">
+      <div className="flex border-b-2 border-border mb-8">
         {[
           { key: 'overview', label: 'Преглед' },
           { key: 'users', label: 'Корисници' },
@@ -45,8 +45,8 @@ export default function AdminPanel() {
             onClick={() => setTab(t.key)}
             className={`px-5 py-3 text-sm font-medium border-b-4 -mb-0.5 transition-colors
               ${tab === t.key
-                ? 'border-accent text-ink-900'
-                : 'border-transparent text-ink-600 hover:text-ink-900'}`}
+                ? 'border-accent text-fg'
+                : 'border-transparent text-muted hover:text-fg'}`}
           >
             {t.label}
           </button>
@@ -83,7 +83,7 @@ function OverviewTab() {
   }
 
   if (!stats) {
-    return <div className="card text-center py-12 text-ink-600">Нема податоци.</div>
+    return <div className="card text-center py-12 text-muted">Нема податоци.</div>
   }
 
   return (
@@ -122,7 +122,7 @@ function OverviewTab() {
         <div className="card">
           <Target size={20} className="text-accent mb-2" />
           <p className="font-display text-3xl">{stats.average_score}%</p>
-          <p className="text-xs font-mono uppercase tracking-widest text-ink-600 mt-1">
+          <p className="text-xs font-mono uppercase tracking-widest text-muted mt-1">
             Просечен скор на платформа
           </p>
         </div>
@@ -130,18 +130,18 @@ function OverviewTab() {
         <div className="card">
           <FileText size={20} className="text-accent mb-2" />
           <p className="font-display text-3xl">{stats.total_materials}</p>
-          <p className="text-xs font-mono uppercase tracking-widest text-ink-600 mt-1">
+          <p className="text-xs font-mono uppercase tracking-widest text-muted mt-1">
             Прикачени материјали
           </p>
         </div>
 
         <Link
           to="/moderation"
-          className={`card-hover ${stats.open_reports > 0 ? 'bg-accent text-cream border-accent' : ''}`}
+          className={`card-hover ${stats.open_reports > 0 ? 'bg-accent text-white border-accent' : ''}`}
         >
           <AlertTriangle size={20} className={`mb-2 ${stats.open_reports > 0 ? '' : 'text-accent'}`} />
           <p className="font-display text-3xl">{stats.open_reports}</p>
-          <p className={`text-xs font-mono uppercase tracking-widest mt-1 ${stats.open_reports > 0 ? '' : 'text-ink-600'}`}>
+          <p className={`text-xs font-mono uppercase tracking-widest mt-1 ${stats.open_reports > 0 ? '' : 'text-muted'}`}>
             Отворени пријави {stats.open_reports > 0 && '→'}
           </p>
         </Link>
@@ -149,18 +149,18 @@ function OverviewTab() {
 
       {/* Users by role */}
       <div className="card">
-        <p className="font-mono text-xs uppercase tracking-widest text-ink-600 mb-4">
+        <p className="font-mono text-xs uppercase tracking-widest text-muted mb-4">
           Корисници по улога
         </p>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           {Object.entries(stats.users_by_role || {}).map(([role, count]) => {
             const Icon = ROLE_ICONS[role] || UserIcon
             return (
-              <div key={role} className="flex items-center gap-3 p-3 border-2 border-ink-900">
-                <Icon size={24} className={role === 'admin' ? 'text-accent' : 'text-ink-700'} />
+              <div key={role} className="flex items-center gap-3 p-3 border-2 border-border">
+                <Icon size={24} className={role === 'admin' ? 'text-accent' : 'text-fg'} />
                 <div>
                   <p className="font-display text-2xl">{count}</p>
-                  <p className="text-[10px] font-mono uppercase tracking-widest text-ink-600">
+                  <p className="text-[10px] font-mono uppercase tracking-widest text-muted">
                     {ROLE_LABELS[role] || role}
                   </p>
                 </div>
@@ -178,21 +178,21 @@ function OverviewTab() {
 
 function BigStat({ label, value, delta, subtitle, icon: Icon, accent }) {
   return (
-    <div className={`card ${accent ? 'bg-accent text-cream border-accent' : ''}`}>
+    <div className={`card ${accent ? 'bg-accent text-white border-accent' : ''}`}>
       <div className="flex items-start justify-between mb-3">
         <Icon size={20} className={accent ? '' : 'text-accent'} />
         {delta !== undefined && (
-          <span className={`text-[10px] font-mono px-1.5 py-0.5 border ${accent ? 'border-cream' : 'border-ink-900'}`}>
+          <span className={`text-[10px] font-mono px-1.5 py-0.5 border ${accent ? 'border-cream' : 'border-border'}`}>
             +{delta} / 7д
           </span>
         )}
       </div>
       <p className="font-display text-4xl font-semibold">{value}</p>
-      <p className={`text-[10px] font-mono uppercase tracking-widest mt-1 ${accent ? '' : 'text-ink-600'}`}>
+      <p className={`text-[10px] font-mono uppercase tracking-widest mt-1 ${accent ? '' : 'text-muted'}`}>
         {label}
       </p>
       {subtitle && (
-        <p className={`text-xs mt-1 ${accent ? 'text-cream/80' : 'text-ink-600'}`}>{subtitle}</p>
+        <p className={`text-xs mt-1 ${accent ? 'text-white/80' : 'text-muted'}`}>{subtitle}</p>
       )}
     </div>
   )
@@ -204,7 +204,7 @@ function ActivityChart({ data }) {
 
   return (
     <div className="card">
-      <p className="font-mono text-xs uppercase tracking-widest text-ink-600 mb-4">
+      <p className="font-mono text-xs uppercase tracking-widest text-muted mb-4">
         Активност (14 дена)
       </p>
       <div className="flex items-end gap-1 h-32 mb-2">
@@ -213,18 +213,18 @@ function ActivityChart({ data }) {
           return (
             <div key={i} className="flex-1 flex flex-col items-center justify-end h-full group relative">
               <div
-                className="w-full bg-ink-900 border border-ink-900 hover:bg-accent hover:border-accent transition-colors"
+                className="w-full bg-fg border border-border hover:bg-accent hover:border-accent transition-colors"
                 style={{ height: `${h}%`, minHeight: '2px' }}
                 title={`${d.date}: ${d.attempts} игри`}
               />
-              <div className="absolute -top-8 hidden group-hover:block bg-ink-900 text-cream text-[10px] px-2 py-1 whitespace-nowrap font-mono">
+              <div className="absolute -top-8 hidden group-hover:block bg-accent text-white text-[10px] px-2 py-1 whitespace-nowrap font-mono">
                 {d.attempts} игри
               </div>
             </div>
           )
         })}
       </div>
-      <div className="flex justify-between text-[10px] font-mono text-ink-500">
+      <div className="flex justify-between text-[10px] font-mono text-subtle">
         <span>{data[0]?.date}</span>
         <span>{data[data.length - 1]?.date}</span>
       </div>
@@ -274,7 +274,7 @@ function UsersTab() {
       {/* Filter bar */}
       <div className="flex flex-wrap gap-3 mb-6">
         <div className="flex-1 min-w-[240px] relative">
-          <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-ink-600" />
+          <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted" />
           <input
             type="text"
             placeholder="Барај по email или корисничко име"
@@ -296,8 +296,8 @@ function UsersTab() {
               onClick={() => setFilter(f.key)}
               className={`px-3 py-2 text-xs font-mono uppercase tracking-widest border-2 transition
                 ${filter === f.key
-                  ? 'bg-ink-900 text-cream border-ink-900'
-                  : 'bg-cream border-ink-900 hover:bg-ink-50'}`}
+                  ? 'bg-accent text-white border-accent'
+                  : 'bg-bg border-border hover:bg-surface'}`}
             >
               {f.label}
             </button>
@@ -310,7 +310,7 @@ function UsersTab() {
           {[...Array(5)].map((_, i) => <div key={i} className="card h-16 shimmer" />)}
         </div>
       ) : filtered.length === 0 ? (
-        <div className="card text-center py-12 text-ink-600">
+        <div className="card text-center py-12 text-muted">
           Нема корисници по овие критериуми.
         </div>
       ) : (
@@ -319,10 +319,10 @@ function UsersTab() {
             const Icon = ROLE_ICONS[u.role] || UserIcon
             return (
               <div key={u.id} className="card !py-3 flex items-center gap-4">
-                <Icon size={20} className={u.role === 'admin' ? 'text-accent shrink-0' : 'text-ink-700 shrink-0'} />
+                <Icon size={20} className={u.role === 'admin' ? 'text-accent shrink-0' : 'text-fg shrink-0'} />
                 <div className="flex-1 min-w-0">
                   <p className="font-medium truncate">{u.username}</p>
-                  <p className="text-xs font-mono text-ink-600 truncate">{u.email}</p>
+                  <p className="text-xs font-mono text-muted truncate">{u.email}</p>
                 </div>
                 <RoleSelect
                   current={u.role}
@@ -343,7 +343,7 @@ function RoleSelect({ current, onChange }) {
     <div className="relative">
       <button
         onClick={() => setOpen(!open)}
-        className="badge bg-cream hover:bg-ink-50 flex items-center gap-1"
+        className="badge bg-bg hover:bg-surface flex items-center gap-1"
       >
         {ROLE_LABELS[current]}
         <ChevronDown size={10} />
@@ -351,12 +351,12 @@ function RoleSelect({ current, onChange }) {
       {open && (
         <>
           <div className="fixed inset-0 z-10" onClick={() => setOpen(false)} />
-          <div className="absolute right-0 top-full mt-1 z-20 bg-cream border-2 border-ink-900 shadow-hard min-w-[140px]">
+          <div className="absolute right-0 top-full mt-1 z-20 bg-bg border-2 border-border shadow-hard min-w-[140px]">
             {Object.entries(ROLE_LABELS).map(([key, label]) => (
               <button
                 key={key}
                 onClick={() => { onChange(key); setOpen(false) }}
-                className={`w-full text-left px-3 py-2 text-xs hover:bg-ink-50 ${current === key ? 'bg-accent text-cream' : ''}`}
+                className={`w-full text-left px-3 py-2 text-xs hover:bg-surface ${current === key ? 'bg-accent text-white' : ''}`}
               >
                 {label}
               </button>
@@ -394,12 +394,12 @@ function ActivityTab() {
   return (
     <div className="space-y-8">
       <div className="card">
-        <p className="font-mono text-xs uppercase tracking-widest text-ink-600 mb-6">
+        <p className="font-mono text-xs uppercase tracking-widest text-muted mb-6">
           Дневна активност (последни 14 дена)
         </p>
 
         <div className="flex gap-6 text-xs font-mono mb-4">
-          <Legend color="bg-ink-900" label="Игри" />
+          <Legend color="bg-accent" label="Игри" />
           <Legend color="bg-accent" label="Нови корисници" />
           <Legend color="bg-ink-500" label="Нови квизови" />
         </div>
@@ -407,11 +407,11 @@ function ActivityTab() {
         <div className="space-y-3">
           {data.map((d, i) => (
             <div key={i} className="grid grid-cols-[80px_1fr] gap-3 items-center">
-              <span className="text-[10px] font-mono text-ink-600">
+              <span className="text-[10px] font-mono text-muted">
                 {new Date(d.date).toLocaleDateString('mk-MK', { day: '2-digit', month: 'short' })}
               </span>
               <div className="space-y-0.5">
-                <Bar value={d.attempts} max={maxValue} color="bg-ink-900" />
+                <Bar value={d.attempts} max={maxValue} color="bg-accent" />
                 <Bar value={d.new_users} max={maxValue} color="bg-accent" />
                 <Bar value={d.new_quizzes} max={maxValue} color="bg-ink-500" />
               </div>
@@ -428,10 +428,10 @@ function Bar({ value, max, color }) {
   return (
     <div className="flex items-center gap-2 h-4">
       <div
-        className={`${color} border border-ink-900 h-3`}
+        className={`${color} border border-border h-3`}
         style={{ width: `${w}%`, minWidth: value > 0 ? '4px' : '0' }}
       />
-      <span className="text-[10px] font-mono text-ink-600">{value}</span>
+      <span className="text-[10px] font-mono text-muted">{value}</span>
     </div>
   )
 }
@@ -439,7 +439,7 @@ function Bar({ value, max, color }) {
 function Legend({ color, label }) {
   return (
     <div className="flex items-center gap-2">
-      <div className={`w-3 h-3 ${color} border border-ink-900`} />
+      <div className={`w-3 h-3 ${color} border border-border`} />
       <span>{label}</span>
     </div>
   )

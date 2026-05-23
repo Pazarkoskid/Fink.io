@@ -65,7 +65,7 @@ export default function Home() {
 
             <p className="text-lg sm:text-xl text-muted max-w-2xl mx-auto mb-10 animate-slide-up" style={{ animationDelay: '0.1s' }}>
               Прикачи учебен материјал. AI генерира квалитетни квизови на македонски јазик.
-              Сподели, играј и учи со колегите.
+              Сподели, играј и расти со колегите.
             </p>
 
             <form onSubmit={onSearch} className="max-w-2xl mx-auto mb-8 animate-slide-up" style={{ animationDelay: '0.2s' }}>
@@ -113,12 +113,12 @@ export default function Home() {
           <FeatureCard
             icon={Upload}
             title="Прикачи материјал"
-            desc="PDF, DOCX, PPTX — ги претвараме во квиз прашања за минута."
+            desc="PDF, DOCX, PPTX — го превртуваме во прашања за минути."
           />
           <FeatureCard
             icon={Sparkles}
             title="AI генерација"
-            desc="Квалитетни прашања на македонски, со точни одговори и објаснувања."
+            desc="Quality questions на македонски, со точни одговори и објаснувања."
             accent
           />
           <FeatureCard

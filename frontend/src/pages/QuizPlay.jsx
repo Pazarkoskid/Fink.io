@@ -92,7 +92,7 @@ export default function QuizPlay() {
       <div className="container-app py-16 text-center">
         <AlertTriangle className="mx-auto mb-3 text-accent" size={32} />
         <h1 className="font-display text-2xl mb-2">Грешка</h1>
-        <p className="text-ink-700 mb-6">{error}</p>
+        <p className="text-fg mb-6">{error}</p>
         <Link to="/" className="btn-primary">Назад на почетна</Link>
       </div>
     )
@@ -111,18 +111,18 @@ export default function QuizPlay() {
   return (
     <div className="min-h-screen flex flex-col">
       {/* Top progress bar */}
-      <div className="sticky top-16 z-30 bg-cream border-b-2 border-ink-900">
+      <div className="sticky top-16 z-30 bg-bg border-b-2 border-border">
         <div className="container-app py-3 flex items-center gap-4">
           <p className="font-mono text-xs uppercase tracking-widest">
             Прашање {idx + 1} / {total}
           </p>
-          <div className="flex-1 h-2 bg-ink-100 border border-ink-900">
+          <div className="flex-1 h-2 bg-surface border border-border">
             <div
               className="h-full bg-accent transition-all duration-300"
               style={{ width: `${progress}%` }}
             />
           </div>
-          <p className="font-mono text-xs text-ink-600">
+          <p className="font-mono text-xs text-muted">
             <Clock size={12} className="inline mr-1" />
             {Math.floor((Date.now() - startTime) / 60000)}мин
           </p>
@@ -131,12 +131,12 @@ export default function QuizPlay() {
 
       <div className="container-app py-10 flex-1">
         <div className="max-w-3xl mx-auto">
-          <p className="font-mono text-xs uppercase tracking-widest text-ink-600 mb-3">
+          <p className="font-mono text-xs uppercase tracking-widest text-muted mb-3">
             {quiz.title}
           </p>
 
           <div className="card mb-6 relative">
-            <span className="badge absolute -top-3 left-6 bg-cream">
+            <span className="badge absolute -top-3 left-6 bg-bg">
               {current.type === 'single' && 'Еден точен'}
               {current.type === 'multiple' && 'Повеќе точни'}
               {current.type === 'essay' && 'Есејско'}
@@ -165,11 +165,11 @@ export default function QuizPlay() {
                       onClick={() => setChoice(current.id, c.id, current.type)}
                       className={`w-full text-left flex items-start gap-4 p-4 border-2 transition-all
                         ${selected
-                          ? 'border-accent bg-accent/10 text-ink-900'
-                          : 'border-ink-900 bg-cream hover:bg-ink-50'}`}
+                          ? 'border-accent bg-accent/10 text-fg'
+                          : 'border-border bg-bg hover:bg-surface'}`}
                     >
                       <span className={`shrink-0 w-8 h-8 border-2 flex items-center justify-center font-mono text-sm
-                        ${selected ? 'border-accent bg-accent text-cream' : 'border-ink-900'}`}>
+                        ${selected ? 'border-accent bg-accent text-white' : 'border-border'}`}>
                         {letter}
                       </span>
                       <span className="flex-1 pt-1">{c.text}</span>
@@ -202,9 +202,9 @@ export default function QuizPlay() {
                     type="button"
                     onClick={() => setIdx(i)}
                     className={`w-8 h-8 border-2 font-mono text-xs
-                      ${i === idx ? 'border-accent bg-accent text-cream'
-                        : isAnswered ? 'border-ink-900 bg-ink-900 text-cream'
-                        : 'border-ink-900 bg-cream'}`}
+                      ${i === idx ? 'border-accent bg-accent text-white'
+                        : isAnswered ? 'border-border bg-accent text-white'
+                        : 'border-border bg-bg'}`}
                   >
                     {i + 1}
                   </button>

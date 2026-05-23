@@ -46,7 +46,7 @@ export default function ModeratorQueue() {
     <div className="container-app py-10">
       <div className="flex items-baseline justify-between mb-8">
         <div>
-          <p className="font-mono text-xs uppercase tracking-widest text-ink-600 mb-1 flex items-center gap-2">
+          <p className="font-mono text-xs uppercase tracking-widest text-muted mb-1 flex items-center gap-2">
             <Shield size={12} /> Модератор
           </p>
           <h1 className="font-display text-4xl">Редица за пријави</h1>
@@ -58,7 +58,7 @@ export default function ModeratorQueue() {
               key={s}
               onClick={() => setFilter(s)}
               className={`px-3 py-1.5 text-xs font-mono uppercase tracking-widest border-2 transition
-                ${filter === s ? 'bg-ink-900 text-cream border-ink-900' : 'bg-cream border-ink-900 hover:bg-ink-50'}`}
+                ${filter === s ? 'bg-accent text-white border-accent' : 'bg-bg border-border hover:bg-surface'}`}
             >
               {s === 'open' && 'Отворени'}
               {s === 'reviewing' && 'Преглед'}
@@ -77,7 +77,7 @@ export default function ModeratorQueue() {
         <div className="card text-center py-12">
           <Check className="mx-auto mb-3 text-accent" size={32} />
           <p className="font-display text-xl mb-1">Нема пријави во оваа категорија.</p>
-          <p className="text-sm text-ink-600">Се е чисто.</p>
+          <p className="text-sm text-muted">Се е чисто.</p>
         </div>
       ) : (
         <div className="space-y-4">
@@ -87,7 +87,7 @@ export default function ModeratorQueue() {
                 <AlertTriangle size={20} className="text-accent shrink-0 mt-1" />
                 <div className="flex-1">
                   <div className="flex items-center gap-2 mb-1">
-                    <span className="badge bg-accent text-cream border-accent">
+                    <span className="badge bg-accent text-white border-accent">
                       {REASON_LABELS[r.reason] || r.reason}
                     </span>
                     <span className="badge">#{r.id}</span>
@@ -95,13 +95,13 @@ export default function ModeratorQueue() {
                   <Link to={`/quiz/${r.quiz}`} className="font-display text-lg hover:text-accent">
                     {r.quiz_title}
                   </Link>
-                  <p className="text-xs font-mono text-ink-600 mt-1">
+                  <p className="text-xs font-mono text-muted mt-1">
                     Пријавено од {r.reporter_username || 'непознат'} • {new Date(r.created_at).toLocaleString('mk-MK')}
                   </p>
                 </div>
               </div>
 
-              <p className="text-sm text-ink-700 mb-4 pl-8">
+              <p className="text-sm text-fg mb-4 pl-8">
                 {r.description}
               </p>
 
@@ -116,7 +116,7 @@ export default function ModeratorQueue() {
                   <button
                     onClick={() => handleAction(r.id, 'remove_quiz')}
                     disabled={actioning === r.id}
-                    className="btn text-xs bg-accent text-cream border-accent hover:bg-ink-900 hover:border-ink-900"
+                    className="btn text-xs bg-accent text-white border-accent hover:bg-fg hover:border-border"
                   >
                     <X size={14} /> Отстрани квиз
                   </button>
@@ -136,7 +136,7 @@ export default function ModeratorQueue() {
                   </button>
                 </div>
               ) : (
-                <p className="text-xs font-mono text-ink-600 pl-8">
+                <p className="text-xs font-mono text-muted pl-8">
                   Обработено од {r.handled_by_username || '—'}
                   {r.moderator_note && <> • {r.moderator_note}</>}
                 </p>

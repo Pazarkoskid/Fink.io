@@ -36,7 +36,7 @@ export default function QuizAnalytics() {
       <div className="container-app py-16 text-center">
         <AlertTriangle className="mx-auto mb-3 text-accent" size={32} />
         <p className="font-display text-2xl mb-2">Не може да се вчита</p>
-        <p className="text-ink-700 mb-6">{error}</p>
+        <p className="text-fg mb-6">{error}</p>
         <Link to="/my-quizzes" className="btn-primary">
           <ArrowLeft size={16} /> Назад
         </Link>
@@ -53,7 +53,7 @@ export default function QuizAnalytics() {
       </Link>
 
       <div className="mb-8">
-        <p className="font-mono text-xs uppercase tracking-widest text-ink-600 mb-1">
+        <p className="font-mono text-xs uppercase tracking-widest text-muted mb-1">
           Статистика
         </p>
         <h1 className="font-display text-4xl">{data.quiz_title}</h1>
@@ -74,14 +74,14 @@ export default function QuizAnalytics() {
 
       {/* Completion rate */}
       <div className="card mb-8">
-        <p className="font-mono text-xs uppercase tracking-widest text-ink-600 mb-2">
+        <p className="font-mono text-xs uppercase tracking-widest text-muted mb-2">
           Стапка на завршување
         </p>
         <div className="flex items-baseline gap-3 mb-3">
           <p className="font-display text-4xl">{data.completion_rate}%</p>
-          <p className="text-sm text-ink-600">од играчите го завршуваат целиот квиз</p>
+          <p className="text-sm text-muted">од играчите го завршуваат целиот квиз</p>
         </div>
-        <div className="h-3 bg-ink-100 border border-ink-900">
+        <div className="h-3 bg-surface border border-border">
           <div
             className="h-full bg-accent transition-all"
             style={{ width: `${data.completion_rate}%` }}
@@ -91,11 +91,11 @@ export default function QuizAnalytics() {
 
       {/* Score distribution */}
       <div className="card mb-8">
-        <p className="font-mono text-xs uppercase tracking-widest text-ink-600 mb-4">
+        <p className="font-mono text-xs uppercase tracking-widest text-muted mb-4">
           Распоред на резултати
         </p>
         {data.plays_count === 0 ? (
-          <p className="text-ink-600 text-sm">Сè уште нема одиграни квизови.</p>
+          <p className="text-muted text-sm">Сè уште нема одиграни квизови.</p>
         ) : (
           <div className="grid grid-cols-11 gap-1 items-end h-40">
             {data.score_distribution.map((count, i) => {
@@ -103,16 +103,16 @@ export default function QuizAnalytics() {
               const isPeak = count > 0 && count === maxBucket
               return (
                 <div key={i} className="flex flex-col items-center gap-2">
-                  <div className="text-[10px] font-mono text-ink-600">
+                  <div className="text-[10px] font-mono text-muted">
                     {count > 0 ? count : ''}
                   </div>
                   <div className="w-full flex-1 flex items-end">
                     <div
-                      className={`w-full transition-all border border-ink-900 ${isPeak ? 'bg-accent' : 'bg-ink-900'}`}
+                      className={`w-full transition-all border border-border ${isPeak ? 'bg-accent' : 'bg-fg'}`}
                       style={{ height: `${height}%`, minHeight: count > 0 ? '4px' : '0' }}
                     />
                   </div>
-                  <div className="text-[10px] font-mono text-ink-600">
+                  <div className="text-[10px] font-mono text-muted">
                     {i === 10 ? '100' : `${i * 10}`}
                   </div>
                 </div>
@@ -120,7 +120,7 @@ export default function QuizAnalytics() {
             })}
           </div>
         )}
-        <p className="text-xs text-ink-600 mt-3 font-mono text-center">
+        <p className="text-xs text-muted mt-3 font-mono text-center">
           Скор % (по интервали од 10)
         </p>
       </div>
@@ -140,7 +140,7 @@ export default function QuizAnalytics() {
               <span className="text-accent">
                 {Math.round(data.hardest_question.accuracy)}% точност
               </span>
-              <span className="text-ink-600">
+              <span className="text-muted">
                 {data.hardest_question.answered_count} одговори
               </span>
             </div>
@@ -159,7 +159,7 @@ export default function QuizAnalytics() {
               <span className="text-green-700">
                 {Math.round(data.easiest_question.accuracy)}% точност
               </span>
-              <span className="text-ink-600">
+              <span className="text-muted">
                 {data.easiest_question.answered_count} одговори
               </span>
             </div>
@@ -169,23 +169,23 @@ export default function QuizAnalytics() {
 
       {/* Per-question table */}
       <div className="card">
-        <p className="font-mono text-xs uppercase tracking-widest text-ink-600 mb-4">
+        <p className="font-mono text-xs uppercase tracking-widest text-muted mb-4">
           Сите прашања
         </p>
         <div className="space-y-2">
           {(data.questions_stats || []).map((q, i) => (
-            <div key={q.question_id} className="flex items-center gap-3 py-2 border-b border-ink-100 last:border-0">
-              <span className="font-mono text-xs text-ink-600 w-6">{i + 1}.</span>
+            <div key={q.question_id} className="flex items-center gap-3 py-2 border-b border-border last:border-0">
+              <span className="font-mono text-xs text-muted w-6">{i + 1}.</span>
               <span className="flex-1 text-sm truncate">{q.text}</span>
               <span className="badge">{q.type}</span>
               {q.accuracy !== null ? (
-                <span className={`font-mono text-xs ${q.accuracy >= 70 ? 'text-green-700' : q.accuracy >= 40 ? 'text-ink-700' : 'text-accent'}`}>
+                <span className={`font-mono text-xs ${q.accuracy >= 70 ? 'text-green-700' : q.accuracy >= 40 ? 'text-fg' : 'text-accent'}`}>
                   {Math.round(q.accuracy)}%
                 </span>
               ) : (
-                <span className="font-mono text-xs text-ink-500">—</span>
+                <span className="font-mono text-xs text-subtle">—</span>
               )}
-              <span className="font-mono text-xs text-ink-500 w-12 text-right">
+              <span className="font-mono text-xs text-subtle w-12 text-right">
                 ({q.answered_count})
               </span>
             </div>
@@ -198,10 +198,10 @@ export default function QuizAnalytics() {
 
 function KPI({ label, value, icon: Icon, accent }) {
   return (
-    <div className={`card ${accent ? 'bg-accent text-cream border-accent' : ''}`}>
+    <div className={`card ${accent ? 'bg-accent text-white border-accent' : ''}`}>
       <Icon size={20} className={`mb-3 ${accent ? '' : 'text-accent'}`} />
       <p className="font-display text-3xl font-semibold">{value}</p>
-      <p className={`text-[10px] font-mono uppercase tracking-widest mt-1 ${accent ? '' : 'text-ink-600'}`}>
+      <p className={`text-[10px] font-mono uppercase tracking-widest mt-1 ${accent ? '' : 'text-muted'}`}>
         {label}
       </p>
     </div>

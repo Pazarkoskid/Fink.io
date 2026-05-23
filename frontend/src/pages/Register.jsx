@@ -36,7 +36,7 @@ export default function Register() {
     <div className="container-app py-16">
       <div className="max-w-md mx-auto">
         <div className="text-center mb-8">
-          <p className="font-mono text-xs uppercase tracking-widest text-ink-600 mb-2">
+          <p className="font-mono text-xs uppercase tracking-widest text-muted mb-2">
             Регистрација
           </p>
           <h1 className="font-display text-4xl">Создај профил</h1>
@@ -46,7 +46,7 @@ export default function Register() {
           <div>
             <label className="label">Корисничко име</label>
             <div className="relative">
-              <UserIcon size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-ink-600" />
+              <UserIcon size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted" />
               <input
                 value={form.username}
                 onChange={update('username')}
@@ -60,7 +60,7 @@ export default function Register() {
           <div>
             <label className="label">E-mail</label>
             <div className="relative">
-              <Mail size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-ink-600" />
+              <Mail size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted" />
               <input
                 type="email"
                 value={form.email}
@@ -74,7 +74,7 @@ export default function Register() {
           <div>
             <label className="label">Лозинка</label>
             <div className="relative">
-              <Lock size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-ink-600" />
+              <Lock size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted" />
               <input
                 type="password"
                 value={form.password}
@@ -89,7 +89,7 @@ export default function Register() {
           <div>
             <label className="label">Потврди лозинка</label>
             <div className="relative">
-              <Lock size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-ink-600" />
+              <Lock size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted" />
               <input
                 type="password"
                 value={form.password_confirm}
@@ -113,8 +113,8 @@ export default function Register() {
                   onClick={() => setForm({ ...form, role: opt.value })}
                   className={`px-3 py-2.5 text-sm border-2 transition-colors ${
                     form.role === opt.value
-                      ? 'bg-ink-900 text-cream border-ink-900'
-                      : 'bg-cream border-ink-900 hover:bg-ink-100'
+                      ? 'bg-accent text-white border-accent'
+                      : 'bg-bg border-border hover:bg-surface'
                   }`}
                 >
                   <GraduationCap size={14} className="inline mr-1.5" />
@@ -125,7 +125,7 @@ export default function Register() {
           </div>
 
           {error && (
-            <div className="bg-accent/10 border-2 border-accent text-ink-900 px-4 py-2 text-sm">
+            <div className="bg-accent/10 border-2 border-accent text-fg px-4 py-2 text-sm">
               {error}
             </div>
           )}
@@ -134,7 +134,7 @@ export default function Register() {
             {submitting ? 'Се регистрирам…' : 'Регистрирај се'}
           </button>
 
-          <div className="text-center text-sm text-ink-700">
+          <div className="text-center text-sm text-fg">
             Веќе имаш профил?{' '}
             <Link to="/login" className="text-accent font-medium hover:underline">
               Најави се

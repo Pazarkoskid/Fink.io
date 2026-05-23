@@ -185,7 +185,7 @@ export default function UserProfile() {
                 </span>
               )}
               {stats.rank && stats.rank <= 100 && (
-                <span className="badge bg-white text-ink-900 border-white">
+                <span className="badge bg-white text-fg border-white">
                   <Trophy size={10} className="inline mr-1" /> #{stats.rank}
                 </span>
               )}
@@ -431,7 +431,7 @@ function FriendsModal({ userId, username, onClose }) {
   }, [userId])
 
   return (
-    <div className="fixed inset-0 bg-ink-900/60 z-50 flex items-center justify-center p-4" onClick={onClose}>
+    <div className="fixed inset-0 bg-fg/60 z-50 flex items-center justify-center p-4" onClick={onClose}>
       <div
         className="rounded-2xl border border-border max-w-2xl w-full max-h-[80vh] overflow-hidden flex flex-col"
         style={{ backgroundColor: 'rgb(var(--surface))' }}

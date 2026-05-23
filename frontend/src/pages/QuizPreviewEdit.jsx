@@ -179,22 +179,22 @@ export default function QuizPreviewEdit() {
       </button>
 
       <div className="flex items-center justify-between gap-3 mb-2">
-        <p className="font-mono text-xs uppercase tracking-widest text-ink-600">
+        <p className="font-mono text-xs uppercase tracking-widest text-muted">
           Уредување · {quiz.status === 'draft' ? 'Нацрт' : 'Објавен'}
         </p>
         {quiz.ai_generated && (
-          <span className="badge bg-accent text-cream">AI генериран</span>
+          <span className="badge bg-accent text-white">AI генериран</span>
         )}
       </div>
 
       <input
-        className="w-full font-display text-4xl bg-transparent border-0 border-b-2 border-ink-200 focus:border-accent focus:outline-none py-2 mb-3"
+        className="w-full font-display text-4xl bg-transparent border-0 border-b-2 border-border focus:border-accent focus:outline-none py-2 mb-3"
         value={quiz.title}
         onChange={(e) => updateField('title', e.target.value)}
       />
 
       <textarea
-        className="w-full bg-transparent border-0 focus:outline-none py-1 mb-6 text-ink-700 resize-none"
+        className="w-full bg-transparent border-0 focus:outline-none py-1 mb-6 text-fg resize-none"
         value={quiz.description || ''}
         onChange={(e) => updateField('description', e.target.value)}
         placeholder="Краток опис на квизот…"
@@ -215,15 +215,15 @@ export default function QuizPreviewEdit() {
           <div key={qIdx} className="card !p-0 overflow-hidden">
             <button
               onClick={() => toggleExpand(qIdx)}
-              className="w-full flex items-center justify-between gap-3 p-4 hover:bg-ink-100 text-left"
+              className="w-full flex items-center justify-between gap-3 p-4 hover:bg-surface text-left"
             >
               <div className="flex items-start gap-3 min-w-0 flex-1">
-                <span className="font-mono text-xs text-ink-600 mt-1">
+                <span className="font-mono text-xs text-muted mt-1">
                   Q{String(qIdx + 1).padStart(2, '0')}
                 </span>
                 <div className="min-w-0 flex-1">
                   <p className="font-medium truncate">{q.text}</p>
-                  <p className="text-xs font-mono text-ink-600 mt-0.5 uppercase tracking-wider">
+                  <p className="text-xs font-mono text-muted mt-0.5 uppercase tracking-wider">
                     {q.type === 'single' ? 'Еден точен' : q.type === 'multiple' ? 'Повеќе точни' : 'Есејско'}
                     {q.choices?.length > 0 && ` · ${q.choices.length} опции`}
                   </p>
@@ -233,7 +233,7 @@ export default function QuizPreviewEdit() {
             </button>
 
             {expanded.has(qIdx) && (
-              <div className="p-4 pt-0 border-t-2 border-ink-200 space-y-4">
+              <div className="p-4 pt-0 border-t-2 border-border space-y-4">
                 <div>
                   <label className="label">Текст на прашањето</label>
                   <textarea
@@ -279,8 +279,8 @@ export default function QuizPreviewEdit() {
                         <div key={cIdx} className="flex items-start gap-2">
                           <button
                             onClick={() => updateChoice(qIdx, cIdx, 'is_correct', !c.is_correct)}
-                            className={`mt-0.5 w-6 h-6 shrink-0 border-2 border-ink-900 flex items-center justify-center ${
-                              c.is_correct ? 'bg-accent text-cream' : 'bg-cream'
+                            className={`mt-0.5 w-6 h-6 shrink-0 border-2 border-border flex items-center justify-center ${
+                              c.is_correct ? 'bg-accent text-white' : 'bg-bg'
                             }`}
                           >
                             {c.is_correct && '✓'}
@@ -319,7 +319,7 @@ export default function QuizPreviewEdit() {
 
                 <button
                   onClick={() => removeQuestion(qIdx)}
-                  className="text-sm text-ink-600 hover:text-accent flex items-center gap-1"
+                  className="text-sm text-muted hover:text-accent flex items-center gap-1"
                 >
                   <Trash2 size={14} /> Избриши прашање
                 </button>
@@ -339,7 +339,7 @@ export default function QuizPreviewEdit() {
         </div>
       )}
 
-      <div className="flex flex-col sm:flex-row gap-3 sticky bottom-4 bg-cream/95 backdrop-blur-sm border-2 border-ink-900 p-3">
+      <div className="flex flex-col sm:flex-row gap-3 sticky bottom-4 bg-bg/95 backdrop-blur-sm border-2 border-border p-3">
         <button onClick={save} disabled={saving} className="btn-secondary flex-1">
           {saving ? <Loader2 size={16} className="animate-spin" /> : <Save size={16} />}
           Зачувај нацрт
@@ -394,16 +394,16 @@ function VisibilityModal({ current, onConfirm, onClose }) {
   ]
 
   return (
-    <div className="fixed inset-0 bg-ink-900/60 z-50 flex items-center justify-center p-4" onClick={onClose}>
+    <div className="fixed inset-0 bg-fg/60 z-50 flex items-center justify-center p-4" onClick={onClose}>
       <div
-        className="bg-cream border-2 border-ink-900 max-w-lg w-full p-6 max-h-[90vh] overflow-y-auto"
+        className="bg-bg border-2 border-border max-w-lg w-full p-6 max-h-[90vh] overflow-y-auto"
         onClick={(e) => e.stopPropagation()}
       >
-        <p className="font-mono text-xs uppercase tracking-widest text-ink-600 mb-2">
+        <p className="font-mono text-xs uppercase tracking-widest text-muted mb-2">
           Објавување
         </p>
         <h2 className="font-display text-2xl mb-1">Кој може да го види?</h2>
-        <p className="text-sm text-ink-600 mb-5">
+        <p className="text-sm text-muted mb-5">
           Можеш да ја смениш видливоста и подоцна од уредувачот.
         </p>
 
@@ -416,14 +416,14 @@ function VisibilityModal({ current, onConfirm, onClose }) {
               className={`w-full text-left p-4 border-2 transition-colors flex items-start gap-3
                 ${choice === o.key
                   ? 'border-accent bg-accent/10'
-                  : 'border-ink-900 hover:bg-ink-50'}`}
+                  : 'border-border hover:bg-surface'}`}
             >
               <span className="text-2xl shrink-0">{o.icon}</span>
               <div className="flex-1 min-w-0">
                 <p className="font-display text-lg">{o.label}</p>
-                <p className="text-xs text-ink-700 mt-1">{o.desc}</p>
+                <p className="text-xs text-fg mt-1">{o.desc}</p>
               </div>
-              <div className={`shrink-0 w-5 h-5 border-2 rounded-full mt-1 ${choice === o.key ? 'border-accent bg-accent' : 'border-ink-900'}`} />
+              <div className={`shrink-0 w-5 h-5 border-2 rounded-full mt-1 ${choice === o.key ? 'border-accent bg-accent' : 'border-border'}`} />
             </button>
           ))}
         </div>

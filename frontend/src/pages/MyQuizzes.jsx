@@ -142,7 +142,7 @@ export default function MyQuizzes() {
       </div>
 
       {/* Tabs */}
-      <div className="flex border-b-2 border-ink-900 mb-6 overflow-x-auto">
+      <div className="flex border-b-2 border-border mb-6 overflow-x-auto">
         {visibleTabs.map(t => {
           const Icon = t.icon
           const active = tab === t.key
@@ -151,7 +151,7 @@ export default function MyQuizzes() {
               key={t.key}
               onClick={() => changeTab(t.key)}
               className={`px-5 py-3 text-sm font-medium border-b-4 -mb-0.5 transition-colors whitespace-nowrap flex items-center gap-2
-                ${active ? 'border-accent text-ink-900' : 'border-transparent text-ink-600 hover:text-ink-900'}`}
+                ${active ? 'border-accent text-fg' : 'border-transparent text-muted hover:text-fg'}`}
             >
               <Icon size={14} /> {t.label}
             </button>
@@ -164,7 +164,7 @@ export default function MyQuizzes() {
         <div className="card !p-4 mb-5">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-3">
             <div className="lg:col-span-2 relative">
-              <SearchIcon size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-ink-600" />
+              <SearchIcon size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted" />
               <input
                 placeholder="Барај по наслов или предмет"
                 value={search}
@@ -231,8 +231,8 @@ export default function MyQuizzes() {
                     onClick={() => setStatusFilter(f.key)}
                     className={`px-2.5 py-1 text-[10px] font-mono uppercase tracking-widest border-2 transition
                       ${statusFilter === f.key
-                        ? 'bg-ink-900 text-cream border-ink-900'
-                        : 'bg-cream border-ink-900 hover:bg-ink-50'}`}
+                        ? 'bg-accent text-white border-accent'
+                        : 'bg-bg border-border hover:bg-surface'}`}
                   >
                     {f.label}
                   </button>
@@ -243,7 +243,7 @@ export default function MyQuizzes() {
             {hasFilters && (
               <button
                 onClick={clearFilters}
-                className="text-xs text-ink-600 hover:text-accent ml-auto flex items-center gap-1"
+                className="text-xs text-muted hover:text-accent ml-auto flex items-center gap-1"
               >
                 <X size={12} /> Исчисти филтри
               </button>
@@ -286,10 +286,10 @@ function QuizRow({ quiz, tab, onDelete, onUnsave }) {
           {tab === 'created' && (
             <span className={`badge ${
               quiz.status === 'published'
-                ? 'bg-ink-900 text-cream border-ink-900'
+                ? 'bg-accent text-white border-accent'
                 : quiz.status === 'removed'
-                ? 'bg-accent text-cream border-accent'
-                : 'bg-cream'
+                ? 'bg-accent text-white border-accent'
+                : 'bg-bg'
             }`}>
               {quiz.status === 'published' ? 'Објавен' : quiz.status === 'removed' ? 'Отстранет' : 'Нацрт'}
             </span>
@@ -305,10 +305,10 @@ function QuizRow({ quiz, tab, onDelete, onUnsave }) {
           {quiz.semester && (
             <span className="badge">Сем. {quiz.semester}</span>
           )}
-          {quiz.ai_generated && <span className="badge bg-accent text-cream border-accent">AI</span>}
+          {quiz.ai_generated && <span className="badge bg-accent text-white border-accent">AI</span>}
         </div>
         <h3 className="font-display text-xl mb-1">{quiz.title}</h3>
-        <p className="text-xs font-mono text-ink-600">
+        <p className="text-xs font-mono text-muted">
           {quiz.questions_count || 0} прашања · {quiz.plays_count} играња ·{' '}
           <Heart size={10} className="inline" /> {quiz.likes_count} · {quiz.subject_name || '—'}
         </p>
@@ -344,7 +344,7 @@ function QuizRow({ quiz, tab, onDelete, onUnsave }) {
             )}
             <button
               onClick={onDelete}
-              className="btn-secondary p-2 hover:bg-accent hover:text-cream hover:border-accent"
+              className="btn-secondary p-2 hover:bg-accent hover:text-white hover:border-accent"
               title="Избриши"
             >
               <Trash2 size={16} />
@@ -355,7 +355,7 @@ function QuizRow({ quiz, tab, onDelete, onUnsave }) {
         {tab === 'saved' && (
           <button
             onClick={onUnsave}
-            className="btn-secondary p-2 hover:bg-accent hover:text-cream hover:border-accent"
+            className="btn-secondary p-2 hover:bg-accent hover:text-white hover:border-accent"
             title="Отстрани од зачувани"
           >
             <Bookmark size={16} fill="currentColor" />
@@ -370,9 +370,9 @@ function HistoryList({ attempts }) {
   if (attempts.length === 0) {
     return (
       <div className="card text-center py-16">
-        <History className="mx-auto mb-3 text-ink-400" size={32} />
+        <History className="mx-auto mb-3 text-subtle" size={32} />
         <p className="font-display text-2xl mb-2">Сè уште не си играл квиз.</p>
-        <p className="text-sm text-ink-600 mb-4">Поминатите квизови ќе се појават тука.</p>
+        <p className="text-sm text-muted mb-4">Поминатите квизови ќе се појават тука.</p>
         <Link to="/search" className="btn-accent inline-flex">Разгледај квизови</Link>
       </div>
     )
@@ -381,7 +381,7 @@ function HistoryList({ attempts }) {
     <div className="space-y-3">
       {attempts.map(a => {
         const scoreColor = a.score >= 70 ? 'text-green-700'
-                         : a.score >= 50 ? 'text-ink-700'
+                         : a.score >= 50 ? 'text-fg'
                          : 'text-accent'
         return (
           <Link
@@ -391,7 +391,7 @@ function HistoryList({ attempts }) {
           >
             <div className="flex-1 min-w-0">
               <h3 className="font-display text-lg truncate">{a.quiz_title}</h3>
-              <p className="text-xs font-mono text-ink-600 mt-1">
+              <p className="text-xs font-mono text-muted mt-1">
                 {new Date(a.started_at).toLocaleString('mk-MK')}
                 {' · '}
                 {a.points_earned} / {a.points_total} поени
@@ -411,9 +411,9 @@ function EmptyState({ tab, isInstructor, hasFilters }) {
   if (hasFilters) {
     return (
       <div className="card text-center py-16">
-        <SearchIcon className="mx-auto mb-3 text-ink-400" size={32} />
+        <SearchIcon className="mx-auto mb-3 text-subtle" size={32} />
         <p className="font-display text-2xl mb-2">Нема резултати.</p>
-        <p className="text-sm text-ink-600">Обиди се да ги исчистиш филтрите.</p>
+        <p className="text-sm text-muted">Обиди се да ги исчистиш филтрите.</p>
       </div>
     )
   }
@@ -421,9 +421,9 @@ function EmptyState({ tab, isInstructor, hasFilters }) {
   if (tab === 'created') {
     return (
       <div className="card text-center py-16">
-        <Plus className="mx-auto mb-3 text-ink-400" size={32} />
+        <Plus className="mx-auto mb-3 text-subtle" size={32} />
         <p className="font-display text-2xl mb-2">Сè уште немаш создадено квизови.</p>
-        <p className="text-sm text-ink-600 mb-5">
+        <p className="text-sm text-muted mb-5">
           {isInstructor
             ? 'Прикачи учебен материјал и Fink.io ќе генерира квалитетни прашања.'
             : 'Стани инструктор за да можеш да создаваш квизови.'}
@@ -440,9 +440,9 @@ function EmptyState({ tab, isInstructor, hasFilters }) {
   if (tab === 'saved') {
     return (
       <div className="card text-center py-16">
-        <Bookmark className="mx-auto mb-3 text-ink-400" size={32} />
+        <Bookmark className="mx-auto mb-3 text-subtle" size={32} />
         <p className="font-display text-2xl mb-2">Нема зачувани квизови.</p>
-        <p className="text-sm text-ink-600 mb-5">
+        <p className="text-sm text-muted mb-5">
           Кога ќе најдеш добар квиз од колега, стегни „Зачувај" — ќе се појави тука за полесно да го најдеш и да го вежбаш пак.
         </p>
         <Link to="/search" className="btn-accent inline-flex">Разгледај квизови</Link>

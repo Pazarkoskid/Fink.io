@@ -42,7 +42,7 @@ export default function Help() {
             <HelpCircle size={10} className="mr-1" /> Поддршка
           </span>
           <h1 className="font-display text-5xl mb-3">Како можеме да помогнеме?</h1>
-          <p className="text-ink-700">
+          <p className="text-fg">
             Најчесто поставувани прашања за работа со Fink.io
           </p>
         </div>
@@ -55,7 +55,7 @@ export default function Help() {
               <div key={i} className="card !p-0 overflow-hidden">
                 <button
                   onClick={() => setOpen(isOpen ? -1 : i)}
-                  className="w-full p-5 flex items-center gap-4 text-left hover:bg-ink-50 transition-colors"
+                  className="w-full p-5 flex items-center gap-4 text-left hover:bg-surface transition-colors"
                 >
                   {Icon && <Icon size={20} className="text-accent shrink-0" />}
                   <span className="flex-1 font-display text-lg">{faq.q}</span>
@@ -65,7 +65,7 @@ export default function Help() {
                   />
                 </button>
                 {isOpen && (
-                  <div className="px-5 pb-5 pt-1 text-ink-700 leading-relaxed">
+                  <div className="px-5 pb-5 pt-1 text-fg leading-relaxed">
                     {faq.a}
                   </div>
                 )}
@@ -74,15 +74,15 @@ export default function Help() {
           })}
         </div>
 
-        <div className="card bg-ink-900 text-cream">
+        <div className="card-dark text-white">
           <Mail size={24} className="text-accent mb-3" />
           <h2 className="font-display text-2xl mb-2">Не го најде одговорот?</h2>
-          <p className="text-ink-200 mb-4">
+          <p className="text-muted mb-4">
             Пиши ни на support@fink.io и ќе ти одговориме во рок од 24 часа.
           </p>
           <a
             href="mailto:support@fink.io"
-            className="btn bg-accent border-accent text-cream hover:bg-cream hover:text-ink-900 hover:border-cream"
+            className="btn bg-accent border-accent text-white hover:bg-bg hover:text-fg hover:border-cream"
           >
             Контактирај нè
           </a>

@@ -58,10 +58,10 @@ export default function QuizDetail() {
         <div>
           <div className="flex flex-wrap items-center gap-2 mb-4">
             {quiz.subject_name && (
-              <span className="badge bg-ink-900 text-cream">{quiz.subject_name}</span>
+              <span className="badge bg-accent text-white">{quiz.subject_name}</span>
             )}
             {quiz.ai_generated && (
-              <span className="badge bg-accent text-cream">AI генериран</span>
+              <span className="badge bg-accent text-white">AI генериран</span>
             )}
             {quiz.tags?.slice(0, 5).map((t) => (
               <span key={t} className="badge">{t}</span>
@@ -71,11 +71,11 @@ export default function QuizDetail() {
           <h1 className="font-display text-4xl md:text-5xl mb-3 leading-tight">{quiz.title}</h1>
 
           {quiz.description && (
-            <p className="text-lg text-ink-700 mb-6 leading-relaxed">{quiz.description}</p>
+            <p className="text-lg text-fg mb-6 leading-relaxed">{quiz.description}</p>
           )}
 
-          <div className="flex flex-wrap items-center gap-4 text-sm font-mono uppercase tracking-wider text-ink-600 mb-8 pb-6 border-b-2 border-ink-200">
-            <span>од <Link to={`/users/${quiz.author}`} className="text-ink-900 font-medium normal-case">{quiz.author_username}</Link></span>
+          <div className="flex flex-wrap items-center gap-4 text-sm font-mono uppercase tracking-wider text-muted mb-8 pb-6 border-b-2 border-border">
+            <span>од <Link to={`/users/${quiz.author}`} className="text-fg font-medium normal-case">{quiz.author_username}</Link></span>
             <span className="flex items-center gap-1"><BookOpen size={14} /> {quiz.questions_count} прашања</span>
             <span className="flex items-center gap-1"><Clock size={14} /> {quiz.estimated_minutes} мин</span>
             <span>{difficulty}</span>
@@ -87,12 +87,12 @@ export default function QuizDetail() {
             <div className="space-y-3">
               {quiz.questions.slice(0, 3).map((q, i) => (
                 <div key={q.id || i} className="card">
-                  <p className="font-mono text-xs uppercase tracking-widest text-ink-600 mb-2">
+                  <p className="font-mono text-xs uppercase tracking-widest text-muted mb-2">
                     Прашање {i + 1}
                   </p>
                   <p className="font-medium mb-3">{q.text}</p>
                   {q.choices?.length > 0 && (
-                    <ul className="space-y-1.5 text-sm text-ink-700">
+                    <ul className="space-y-1.5 text-sm text-fg">
                       {q.choices.map((c, j) => (
                         <li key={j} className="flex items-center gap-2">
                           <span className="w-5 h-5 border border-ink-300 inline-flex items-center justify-center text-xs">
@@ -106,19 +106,19 @@ export default function QuizDetail() {
                 </div>
               ))}
               {quiz.questions.length > 3 && (
-                <p className="text-center text-sm font-mono text-ink-600 py-3">
+                <p className="text-center text-sm font-mono text-muted py-3">
                   + уште {quiz.questions.length - 3} прашања
                 </p>
               )}
             </div>
           ) : (
-            <p className="text-sm text-ink-600">Квизот сè уште нема прашања.</p>
+            <p className="text-sm text-muted">Квизот сè уште нема прашања.</p>
           )}
         </div>
 
         {/* Sidebar */}
         <aside className="space-y-4">
-          <div className="card bg-ink-900 text-cream sticky top-20">
+          <div className="card-dark text-white sticky top-20">
             <p className="font-mono text-xs uppercase tracking-widest text-accent mb-2">
               Започни сега
             </p>
@@ -157,7 +157,7 @@ export default function QuizDetail() {
           </div>
 
           <div className="card text-xs font-mono">
-            <p className="uppercase tracking-widest text-ink-600 mb-2">Информации</p>
+            <p className="uppercase tracking-widest text-muted mb-2">Информации</p>
             <dl className="space-y-1.5">
               <div className="flex justify-between"><dt>Создаден:</dt><dd>{new Date(quiz.created_at).toLocaleDateString('mk-MK')}</dd></div>
               {quiz.published_at && (
@@ -198,8 +198,8 @@ function ReportModal({ quizId, onClose }) {
   }
 
   return (
-    <div className="fixed inset-0 bg-ink-900/60 z-50 flex items-center justify-center p-4">
-      <div className="bg-cream border-2 border-ink-900 max-w-md w-full p-6">
+    <div className="fixed inset-0 bg-fg/60 z-50 flex items-center justify-center p-4">
+      <div className="bg-bg border-2 border-border max-w-md w-full p-6">
         <div className="flex items-center justify-between mb-4">
           <h3 className="font-display text-2xl">Пријави квиз</h3>
           <button onClick={onClose} className="p-1 hover:text-accent"><X size={18} /></button>
@@ -208,7 +208,7 @@ function ReportModal({ quizId, onClose }) {
         {done ? (
           <div className="text-center py-6">
             <p className="font-display text-xl mb-2">Пријавата е примена.</p>
-            <p className="text-sm text-ink-600 mb-4">Модераторите ќе ја разгледаат.</p>
+            <p className="text-sm text-muted mb-4">Модераторите ќе ја разгледаат.</p>
             <button onClick={onClose} className="btn-primary">Затвори</button>
           </div>
         ) : (

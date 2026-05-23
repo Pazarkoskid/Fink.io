@@ -167,9 +167,9 @@ export default function Upload() {
       {/* Stepper */}
       <div className="flex items-center gap-2 mb-10 font-mono text-xs uppercase tracking-widest">
         <Step n={1} active={step === 1} done={step > 1}>Прикачи</Step>
-        <ChevronRight size={14} className="text-ink-400" />
+        <ChevronRight size={14} className="text-subtle" />
         <Step n={2} active={step === 2} done={step > 2}>Конфигурирај</Step>
-        <ChevronRight size={14} className="text-ink-400" />
+        <ChevronRight size={14} className="text-subtle" />
         <Step n={3} active={step === 3} done={false}>Генерирај</Step>
       </div>
 
@@ -187,7 +187,7 @@ export default function Upload() {
                 onFilePick(e.dataTransfer.files[0])
               }}
               className={`block border-2 border-dashed cursor-pointer p-10 text-center transition-colors ${
-                dragOver ? 'border-accent bg-accent/5' : 'border-ink-900 hover:bg-ink-100'
+                dragOver ? 'border-accent bg-accent/5' : 'border-border hover:bg-surface'
               }`}
             >
               <input
@@ -201,16 +201,16 @@ export default function Upload() {
                   <FileText size={28} className="text-accent shrink-0" />
                   <div className="min-w-0">
                     <p className="font-medium truncate">{file.name}</p>
-                    <p className="text-xs font-mono text-ink-600">
+                    <p className="text-xs font-mono text-muted">
                       {(file.size / 1024 / 1024).toFixed(2)} MB
                     </p>
                   </div>
                 </div>
               ) : (
                 <>
-                  <UploadCloud size={36} className="mx-auto mb-3 text-ink-600" />
+                  <UploadCloud size={36} className="mx-auto mb-3 text-muted" />
                   <p className="font-medium mb-1">Влечи и пушти датотека овде</p>
-                  <p className="text-xs font-mono text-ink-600">
+                  <p className="text-xs font-mono text-muted">
                     или кликни за да избереш · PDF, DOC, DOCX, PPT, PPTX, TXT · макс. 50MB
                   </p>
                 </>
@@ -287,12 +287,12 @@ export default function Upload() {
       {/* STEP 2 — Configure AI */}
       {step === 2 && material && (
         <div className="space-y-6">
-          <div className="card bg-ink-900 text-cream">
+          <div className="card-dark text-white">
             <p className="font-mono text-xs uppercase tracking-widest text-accent mb-2">
               Прикачен материјал
             </p>
             <h3 className="font-display text-2xl mb-1">{material.title}</h3>
-            <p className="text-xs font-mono text-ink-200">
+            <p className="text-xs font-mono text-muted">
               {material.extension} · {(material.file_size / 1024).toFixed(0)} KB · Текст извлечен
             </p>
           </div>
@@ -316,7 +316,7 @@ export default function Upload() {
                   onChange={(e) => setNumQuestions(parseInt(e.target.value))}
                   className="w-full accent-accent"
                 />
-                <div className="flex justify-between text-xs font-mono text-ink-600 mt-1">
+                <div className="flex justify-between text-xs font-mono text-muted mt-1">
                   <span>3</span>
                   <span>30</span>
                 </div>
@@ -334,7 +334,7 @@ export default function Upload() {
                   onChange={(e) => setNQuizzes(parseInt(e.target.value))}
                   className="w-full accent-accent"
                 />
-                <p className="text-xs font-mono text-ink-600 mt-1">
+                <p className="text-xs font-mono text-muted mt-1">
                   {nQuizzes === 1
                     ? 'Сите прашања во еден квиз.'
                     : `Прашањата ќе се поделат рамномерно меѓу ${nQuizzes} квиза.`}
@@ -355,8 +355,8 @@ export default function Upload() {
                       onClick={() => toggleType(opt.v)}
                       className={`px-3 py-2.5 text-sm border-2 transition-colors ${
                         questionTypes.includes(opt.v)
-                          ? 'bg-ink-900 text-cream border-ink-900'
-                          : 'bg-cream border-ink-900 hover:bg-ink-100'
+                          ? 'bg-accent text-white border-accent'
+                          : 'bg-bg border-border hover:bg-surface'
                       }`}
                     >
                       {opt.l}
@@ -375,8 +375,8 @@ export default function Upload() {
                       onClick={() => setDifficulty(v)}
                       className={`px-3 py-2.5 text-sm border-2 transition-colors ${
                         difficulty === v
-                          ? 'bg-accent text-cream border-accent'
-                          : 'bg-cream border-ink-900 hover:bg-ink-100'
+                          ? 'bg-accent text-white border-accent'
+                          : 'bg-bg border-border hover:bg-surface'
                       }`}
                     >
                       {l}
@@ -429,7 +429,7 @@ export default function Upload() {
         <div className="card text-center py-16">
           <Loader2 size={48} className="mx-auto mb-5 animate-spin text-accent" />
           <h3 className="font-display text-2xl mb-2">AI генерира прашања…</h3>
-          <p className="text-sm text-ink-600 max-w-md mx-auto">
+          <p className="text-sm text-muted max-w-md mx-auto">
             Ова може да трае 10–60 секунди во зависност од големината на материјалот.
             Потоа ќе можеш да ги прегледаш и уредиш.
           </p>
@@ -442,11 +442,11 @@ export default function Upload() {
 function Step({ n, active, done, children }) {
   return (
     <div className={`flex items-center gap-2 ${
-      active ? 'text-accent' : done ? 'text-ink-900' : 'text-ink-400'
+      active ? 'text-accent' : done ? 'text-fg' : 'text-subtle'
     }`}>
       <span className={`w-6 h-6 flex items-center justify-center border-2 text-xs ${
-        active ? 'bg-accent text-cream border-accent'
-              : done ? 'bg-ink-900 text-cream border-ink-900'
+        active ? 'bg-accent text-white border-accent'
+              : done ? 'bg-accent text-white border-accent'
               : 'border-ink-400'
       }`}>
         {n}

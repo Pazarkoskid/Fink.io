@@ -49,7 +49,7 @@ export default function Leaderboard() {
           <Trophy size={10} className="mr-1" /> Ранг листа
         </span>
         <h1 className="font-display text-5xl mb-3">Топ 10</h1>
-        <p className="text-ink-700 max-w-xl mx-auto">
+        <p className="text-fg max-w-xl mx-auto">
           Заработи поени со одговарање на квизови. Перфектни резултати носат бонус.
         </p>
       </div>
@@ -64,8 +64,8 @@ export default function Leaderboard() {
               onClick={() => setRoleTab(t.key)}
               className={`px-5 py-2 text-sm font-medium border-2 transition-colors flex items-center gap-2
                 ${roleTab === t.key
-                  ? 'bg-ink-900 text-cream border-ink-900'
-                  : 'bg-cream border-ink-900 hover:bg-ink-50'}`}
+                  ? 'bg-accent text-white border-accent'
+                  : 'bg-bg border-border hover:bg-surface'}`}
             >
               <Icon size={14} /> {t.label}
             </button>
@@ -81,8 +81,8 @@ export default function Leaderboard() {
             onClick={() => setPeriod(p.key)}
             className={`px-4 py-1.5 text-[10px] font-mono uppercase tracking-widest border-2 transition
               ${period === p.key
-                ? 'bg-accent text-cream border-accent'
-                : 'bg-cream border-ink-900 hover:bg-ink-50'}`}
+                ? 'bg-accent text-white border-accent'
+                : 'bg-bg border-border hover:bg-surface'}`}
           >
             {p.label}
           </button>
@@ -94,18 +94,18 @@ export default function Leaderboard() {
         (roleTab === 'student' && user.role === 'student') ||
         (roleTab === 'instructor' && (user.role === 'instructor' || user.role === 'admin'))
       ) && (
-        <div className="card bg-ink-900 text-cream mb-10 relative overflow-hidden">
+        <div className="card-dark text-white mb-10 relative overflow-hidden">
           <div className="absolute -top-10 -right-10 w-48 h-48 bg-accent/20 rounded-full blur-3xl" />
           <div className="relative flex flex-wrap gap-6 items-center justify-between">
             <div>
-              <p className="font-mono text-xs uppercase tracking-widest text-ink-300 mb-1">
+              <p className="font-mono text-xs uppercase tracking-widest text-muted mb-1">
                 Твојот ранг во „{tabLabel}"
               </p>
               <div className="flex items-baseline gap-3">
                 <p className="font-display text-5xl font-semibold">
                   #{myStats.rank}
                 </p>
-                <p className="text-sm text-ink-300">
+                <p className="text-sm text-muted">
                   од {myStats.total_users || 0} активни
                 </p>
               </div>
@@ -128,11 +128,11 @@ export default function Leaderboard() {
         </div>
       ) : entries.length === 0 ? (
         <div className="card text-center py-16">
-          <Trophy className="mx-auto mb-3 text-ink-400" size={32} />
+          <Trophy className="mx-auto mb-3 text-subtle" size={32} />
           <p className="font-display text-xl mb-1">
             Сè уште нема резултати во оваа категорија.
           </p>
-          <p className="text-sm text-ink-600 mb-4">
+          <p className="text-sm text-muted mb-4">
             {roleTab === 'student'
               ? 'Биди прв студент кој ќе одигра квиз!'
               : 'Инструкторите треба да одиграат квизови за да се појават тука.'}
@@ -157,13 +157,13 @@ export default function Leaderboard() {
             <div className="space-y-2">
               {rest.map((e) => (
                 <div key={e.user_id} className="card !py-3 flex items-center gap-4">
-                  <span className="font-mono text-sm w-8 text-ink-600 shrink-0">
+                  <span className="font-mono text-sm w-8 text-muted shrink-0">
                     #{e.rank}
                   </span>
                   <span className="font-display text-lg flex-1 truncate">
                     {e.username}
                   </span>
-                  <div className="flex items-center gap-4 font-mono text-xs text-ink-700">
+                  <div className="flex items-center gap-4 font-mono text-xs text-fg">
                     <span title="Поени">
                       <Award size={12} className="inline mr-1" />
                       {e.total_points}
@@ -185,11 +185,11 @@ export default function Leaderboard() {
       )}
 
       {/* How to earn */}
-      <section className="card mt-12 bg-ink-50">
+      <section className="card mt-12 bg-surface">
         <h3 className="font-display text-xl mb-4 flex items-center gap-2">
           <TrendingUp size={20} /> Како се добиваат поени?
         </h3>
-        <ul className="space-y-2 text-sm text-ink-700">
+        <ul className="space-y-2 text-sm text-fg">
           <li>• <strong>+1 поен</strong> за секој точен одговор</li>
           <li>• <strong>+5 поени</strong> бонус за совршен резултат (100%)</li>
           <li>• Се градат серии — одговори квиз секој ден за да расте бројката со пламенот</li>
@@ -203,16 +203,16 @@ function MyStat({ label, value, accent }) {
   return (
     <div>
       <p className={`font-display text-2xl ${accent ? 'text-accent' : ''}`}>{value}</p>
-      <p className="text-[10px] font-mono uppercase tracking-widest text-ink-300">{label}</p>
+      <p className="text-[10px] font-mono uppercase tracking-widest text-muted">{label}</p>
     </div>
   )
 }
 
 function PodiumCard({ entry, place, className = '' }) {
   const colors = {
-    1: { bg: 'bg-accent text-cream border-accent', icon: Crown },
-    2: { bg: 'bg-ink-900 text-cream border-ink-900', icon: Medal },
-    3: { bg: 'bg-ink-700 text-cream border-ink-700', icon: Medal },
+    1: { bg: 'bg-accent text-white border-accent', icon: Crown },
+    2: { bg: 'bg-accent text-white border-accent', icon: Medal },
+    3: { bg: 'bg-ink-700 text-white border-border', icon: Medal },
   }[place]
   const Icon = colors.icon
 

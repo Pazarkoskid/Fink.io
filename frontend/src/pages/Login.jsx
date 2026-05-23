@@ -31,7 +31,7 @@ export default function Login() {
     <div className="container-app py-16">
       <div className="max-w-md mx-auto">
         <div className="text-center mb-8">
-          <p className="font-mono text-xs uppercase tracking-widest text-ink-600 mb-2">
+          <p className="font-mono text-xs uppercase tracking-widest text-muted mb-2">
             Најава
           </p>
           <h1 className="font-display text-4xl">Добредојде назад</h1>
@@ -41,7 +41,7 @@ export default function Login() {
           <div>
             <label className="label">E-mail</label>
             <div className="relative">
-              <Mail size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-ink-600" />
+              <Mail size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted" />
               <input
                 type="email"
                 value={email}
@@ -56,7 +56,7 @@ export default function Login() {
           <div>
             <label className="label">Лозинка</label>
             <div className="relative">
-              <Lock size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-ink-600" />
+              <Lock size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted" />
               <input
                 type="password"
                 value={password}
@@ -68,7 +68,7 @@ export default function Login() {
           </div>
 
           {error && (
-            <div className="bg-accent/10 border-2 border-accent text-ink-900 px-4 py-2 text-sm">
+            <div className="bg-accent/10 border-2 border-accent text-fg px-4 py-2 text-sm">
               {error}
             </div>
           )}
@@ -77,7 +77,7 @@ export default function Login() {
             {submitting ? 'Се најавувам…' : 'Најави се'}
           </button>
 
-          <div className="text-center text-sm text-ink-700">
+          <div className="text-center text-sm text-fg">
             Немаш профил?{' '}
             <Link to="/register" className="text-accent font-medium hover:underline">
               Регистрирај се

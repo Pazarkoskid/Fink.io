@@ -80,13 +80,13 @@ export default function Search() {
   return (
     <div className="container-app py-10">
       <div className="mb-6">
-        <p className="font-mono text-xs uppercase tracking-widest text-ink-600 mb-2">
+        <p className="font-mono text-xs uppercase tracking-widest text-muted mb-2">
           Пребарување
         </p>
         <h1 className="font-display text-4xl mb-6">Сите квизови</h1>
 
         <div className="relative max-w-3xl">
-          <SearchIcon size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-ink-600" />
+          <SearchIcon size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-muted" />
           <input
             type="text"
             value={query}
@@ -100,7 +100,7 @@ export default function Search() {
       <div className="grid grid-cols-1 lg:grid-cols-[260px_1fr] gap-6">
         {/* Filters sidebar */}
         <aside className="space-y-5">
-          <div className="flex items-center justify-between font-mono text-xs uppercase tracking-widest text-ink-700">
+          <div className="flex items-center justify-between font-mono text-xs uppercase tracking-widest text-fg">
             <span className="flex items-center gap-1.5"><Filter size={12} /> Филтри</span>
             {hasFilters && (
               <button
@@ -169,7 +169,7 @@ export default function Search() {
                 </option>
               ))}
             </select>
-            <p className="text-[10px] font-mono text-ink-500 mt-1">
+            <p className="text-[10px] font-mono text-subtle mt-1">
               {filteredSubjects.length} предмети
             </p>
           </div>
@@ -204,9 +204,9 @@ export default function Search() {
             </div>
           ) : quizzes.length === 0 ? (
             <div className="card text-center py-16">
-              <SearchIcon className="mx-auto mb-3 text-ink-400" size={32} />
+              <SearchIcon className="mx-auto mb-3 text-subtle" size={32} />
               <p className="font-display text-xl mb-1">Нема резултати.</p>
-              <p className="text-sm text-ink-600">
+              <p className="text-sm text-muted">
                 {hasFilters
                   ? 'Обиди се да ги исчистиш филтрите или со други клучни зборови.'
                   : 'Сè уште нема објавени квизови. Биди прв.'}
@@ -214,7 +214,7 @@ export default function Search() {
             </div>
           ) : (
             <>
-              <p className="font-mono text-xs uppercase tracking-widest text-ink-600 mb-4">
+              <p className="font-mono text-xs uppercase tracking-widest text-muted mb-4">
                 {quizzes.length} резултати
               </p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -234,8 +234,8 @@ function FilterButton({ active, onClick, children, block }) {
       onClick={onClick}
       className={`${block ? 'block w-full text-left ' : ''}px-3 py-1.5 text-xs font-mono uppercase tracking-widest border-2 transition-colors
         ${active
-          ? 'bg-ink-900 text-cream border-ink-900'
-          : 'bg-cream border-ink-900 hover:bg-ink-50'}`}
+          ? 'bg-accent text-white border-accent'
+          : 'bg-bg border-border hover:bg-surface'}`}
     >
       {children}
     </button>

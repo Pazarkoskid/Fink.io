@@ -32,7 +32,7 @@ export default function QuizResult() {
   const scoreLabel = score >= 90 ? 'Одлично!' :
                      score >= 70 ? 'Многу добро!' :
                      score >= 50 ? 'Солидно.' : 'Има простор за подобрување.'
-  const scoreColor = score >= 70 ? 'text-accent' : 'text-ink-700'
+  const scoreColor = score >= 70 ? 'text-accent' : 'text-fg'
 
   return (
     <div className="container-app py-12">
@@ -41,14 +41,14 @@ export default function QuizResult() {
         <div className="card mb-8 text-center relative overflow-hidden">
           <div className="absolute -top-24 -right-24 w-64 h-64 bg-accent/10 rounded-full blur-3xl" />
           <Trophy className={`mx-auto mb-4 ${scoreColor}`} size={48} />
-          <p className="font-mono text-xs uppercase tracking-widest text-ink-600 mb-2">
+          <p className="font-mono text-xs uppercase tracking-widest text-muted mb-2">
             Твојот резултат
           </p>
           <p className={`font-display text-7xl font-semibold mb-2 ${scoreColor}`}>
             {score}%
           </p>
-          <p className="text-ink-700 mb-4">{scoreLabel}</p>
-          <div className="flex justify-center gap-6 font-mono text-xs text-ink-600">
+          <p className="text-fg mb-4">{scoreLabel}</p>
+          <div className="flex justify-center gap-6 font-mono text-xs text-muted">
             <span>{attempt.points_earned} / {attempt.points_total} поени</span>
             <span>•</span>
             <span>{elapsedMin}мин {elapsedSec}сек</span>
@@ -56,7 +56,7 @@ export default function QuizResult() {
         </div>
 
         {/* Question by question */}
-        <p className="font-mono text-xs uppercase tracking-widest text-ink-600 mb-4">
+        <p className="font-mono text-xs uppercase tracking-widest text-muted mb-4">
           Детален преглед
         </p>
         <div className="space-y-4 mb-8">
@@ -69,13 +69,13 @@ export default function QuizResult() {
               <div key={r.question_id} className="card">
                 <div className="flex items-start gap-3 mb-3">
                   <span className={`shrink-0 w-8 h-8 border-2 flex items-center justify-center font-mono text-xs
-                    ${isCorrect ? 'border-green-700 bg-green-700 text-cream'
-                      : isWrong ? 'border-accent bg-accent text-cream'
-                      : 'border-ink-700 bg-ink-700 text-cream'}`}>
+                    ${isCorrect ? 'border-green-700 bg-green-700 text-white'
+                      : isWrong ? 'border-accent bg-accent text-white'
+                      : 'border-border bg-ink-700 text-white'}`}>
                     {isCorrect ? <Check size={14} /> : isWrong ? <X size={14} /> : <HelpCircle size={14} />}
                   </span>
                   <div className="flex-1">
-                    <p className="font-mono text-xs text-ink-600 mb-1">
+                    <p className="font-mono text-xs text-muted mb-1">
                       Прашање {i + 1}
                     </p>
                     <h3 className="font-display text-lg mb-3">{r.question_text}</h3>
@@ -88,14 +88,14 @@ export default function QuizResult() {
                     {/* Just show user's answers and correct ones */}
                     <div className="flex flex-wrap gap-x-4 gap-y-1 font-mono text-xs">
                       <div>
-                        <span className="text-ink-600">Твој одговор: </span>
+                        <span className="text-muted">Твој одговор: </span>
                         <span className={isCorrect ? 'text-green-700' : 'text-accent'}>
                           {r.user_choice_ids.length ? `опции ${r.user_choice_ids.join(', ')}` : '— празно —'}
                         </span>
                       </div>
                       {!isCorrect && (
                         <div>
-                          <span className="text-ink-600">Точно: </span>
+                          <span className="text-muted">Точно: </span>
                           <span className="text-green-700">
                             опции {r.correct_choice_ids.join(', ')}
                           </span>
@@ -105,22 +105,22 @@ export default function QuizResult() {
                   </div>
                 ) : (
                   <div className="ml-11 mb-3">
-                    <p className="text-xs font-mono text-ink-600 mb-1">Твој одговор:</p>
-                    <p className="text-sm bg-ink-50 border border-ink-200 p-3 italic">
+                    <p className="text-xs font-mono text-muted mb-1">Твој одговор:</p>
+                    <p className="text-sm bg-surface border border-border p-3 italic">
                       {r.user_text || '— празно —'}
                     </p>
-                    <p className="text-xs font-mono text-ink-600 mt-2">
+                    <p className="text-xs font-mono text-muted mt-2">
                       Есејските прашања не се автоматски бодувани.
                     </p>
                   </div>
                 )}
 
                 {r.explanation && (
-                  <div className="ml-11 mt-3 pt-3 border-t border-ink-200">
-                    <p className="text-xs font-mono uppercase tracking-widest text-ink-600 mb-1">
+                  <div className="ml-11 mt-3 pt-3 border-t border-border">
+                    <p className="text-xs font-mono uppercase tracking-widest text-muted mb-1">
                       Објаснување
                     </p>
-                    <p className="text-sm text-ink-700">{r.explanation}</p>
+                    <p className="text-sm text-fg">{r.explanation}</p>
                   </div>
                 )}
               </div>
