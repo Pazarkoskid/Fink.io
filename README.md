@@ -155,11 +155,6 @@ fink_io/
 - `.badge`, `.badge-accent`, `.badge-soft`
 - `.input`, `.label`
 
-### Шрифтови
-- **Display:** Fraunces (serif, наслови)
-- **Sans:** Manrope (UI)
-- **Mono:** JetBrains Mono (meta)
-
 ---
 
 ## 🔐 Auth & улоги
@@ -255,26 +250,6 @@ WS:    ws://localhost:8000/ws/chat/?token=<jwt>
 
 ---
 
-## 🎮 Кориснички flow
-
-### Прв квиз (студент)
-1. `/register` → email/username/password → автоматски логиран
-2. `/profile` → стави статус (Coffee ☕), година, аватар
-3. `/upload` → drag&drop PDF
-4. Опции:
-   - **„Само зачувај како база"** → во `/databases` без квиз
-   - **„Генерирај квиз"** → AI прави прашања (Gemini, ~10–30s)
-5. Step 3: AI создава 1–3 квизови како нацрти
-6. `/my-quizzes` → Нацрти → Уреди → Објави
-
-### Пријатели + чет
-1. `/users/<id>` → „Додај пријател"
-2. Другиот добива нотификација (bell badge)
-3. `/friends/Барања` → „Прифати"
-4. „Порака" 💬 на профилот → отвара чет
-5. `/messages` — real-time WebSocket, online dot, typing indicator
-
----
 
 ## 🎯 Беџови (14 типа × 4 нивоа)
 
@@ -296,78 +271,9 @@ WS:    ws://localhost:8000/ws/chat/?token=<jwt>
 
 ---
 
-## 🚢 Production deploy (Render.com)
-
-### Backend
-1. Push на GitHub
-2. Render → New → Web Service
-3. **Build command:** `./build.sh`
-4. **Start command:** `daphne fink_io.asgi:application -p $PORT -b 0.0.0.0`
-   - ⚠️ Не gunicorn! Daphne е потребен за WebSocket
-5. **Environment variables:**
-   ```
-   SECRET_KEY=<random>
-   DEBUG=False
-   ALLOWED_HOSTS=<your-app>.onrender.com
-   DATABASE_URL=<auto>
-   GEMINI_API_KEY=<your>
-   CORS_ALLOWED_ORIGINS=https://<your-frontend>
-   ```
-6. Add **PostgreSQL** database
-
-⚠️ За multi-instance scaling на чет, треба `channels-redis` + Redis. За сега `InMemoryChannelLayer` работи single-instance.
-
-### Frontend
-1. `npm run build`
-2. Render Static Site, build dir `frontend/dist`
-3. Env: `VITE_API_URL=https://<backend>.onrender.com/api`
-
----
-
-## 🧰 Корисни команди
-
-```powershell
-# Backend
-python manage.py seed_subjects                    # засеј (idempotent)
-python manage.py createsuperuser
-python manage.py shell
-
-# Направи материјали јавни (старо)
-python manage.py shell
->>> from apps.materials.models import Material
->>> Material.objects.all().update(visibility='public')
-
-# Frontend
-npm run dev
-npm run build
-npm run preview
-```
-
----
-
-## 🐛 Чести проблеми
-
-### „Сите Gemini модели не успеаја: 503"
-Google презафатени се. Системот пробува 4 модели + retries. Чекај 1–2 минути.
-
-### WebSocket не се поврзува
-- `daphne` мора да е во INSTALLED_APPS (прв)
-- Лог треба да каже „Starting ASGI/Daphne version 4.x"
-
-### Темната тема — текст и позадина се преклопуваат
-Поправено — сите страници сега користат theme-aware класи (`bg-bg`, `text-fg`, итн.).
-
-### Дупликат пораки во чет
-Поправено — оптимистички render + server потврда со `temp_id` за dedup.
-
-### Аватар не се прикажува
-Аватарите се чуваат во `media/avatars/`. Django ги серви за dev. За production треба persistent storage (Render disk или S3).
-
----
-
 ## 👤 Автор
 
-**Pazarkoski D.**
+**Pazarkoski Daniel.**
 - 🌐 [pazarkoskid.github.io/portfolio](https://pazarkoskid.github.io/portfolio/)
 - 📚 ФИНКИ, УКИМ
 
