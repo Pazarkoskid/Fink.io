@@ -151,6 +151,17 @@ CORS_ALLOWED_ORIGINS = env.list(
 )
 CORS_ALLOW_CREDENTIALS = True
 
+# Allow Render preview URLs and *.onrender.com via regex (helps with deploy previews)
+CORS_ALLOWED_ORIGIN_REGEXES = [
+    r"^https://.*\.onrender\.com$",
+]
+
+# CSRF trusted origins (needed for Django 5 + Render proxy)
+CSRF_TRUSTED_ORIGINS = env.list(
+    'CSRF_TRUSTED_ORIGINS',
+    default=['https://*.onrender.com']
+)
+
 # File upload limits
 DATA_UPLOAD_MAX_MEMORY_SIZE = 50 * 1024 * 1024  # 50 MB
 FILE_UPLOAD_MAX_MEMORY_SIZE = 50 * 1024 * 1024
