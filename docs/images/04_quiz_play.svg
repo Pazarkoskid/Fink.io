@@ -1,0 +1,103 @@
+<svg width="1200" height="760" viewBox="0 0 1200 760" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<linearGradient id="bgL" x1="0%" y1="0%" x2="100%" y2="100%">
+<stop offset="0%" stop-color="#fbf8ec"/>
+<stop offset="100%" stop-color="#f5f0e1"/>
+</linearGradient>
+<linearGradient id="oG" x1="0%" y1="0%" x2="100%" y2="100%">
+<stop offset="0%" stop-color="#ff7a3f"/>
+<stop offset="100%" stop-color="#c43d0a"/>
+</linearGradient>
+<radialGradient id="gl" cx="50%" cy="50%" r="50%">
+<stop offset="0%" stop-color="#ff5b1f" stop-opacity="0.18"/>
+<stop offset="100%" stop-color="#ff5b1f" stop-opacity="0"/>
+</radialGradient>
+<clipPath id="lapScr"><rect x="135" y="80" width="930" height="580" rx="6"/></clipPath>
+</defs>
+
+<rect width="1200" height="760" fill="url(#bgL)"/>
+<circle cx="150" cy="150" r="220" fill="url(#gl)"/>
+<circle cx="1050" cy="650" r="200" fill="url(#gl)"/>
+
+<path d="M 80 690 L 1120 690 L 1150 725 L 50 725 Z" fill="#181712"/>
+<rect x="570" y="690" width="60" height="6" rx="2" fill="#0c0b08"/>
+<rect x="105" y="55" width="990" height="635" rx="10" fill="#181712"/>
+<rect x="135" y="80" width="930" height="580" rx="6" fill="#fbf8ec"/>
+<circle cx="600" cy="68" r="2.5" fill="#444441"/>
+
+<g clip-path="url(#lapScr)">
+<rect x="135" y="80" width="930" height="50" fill="#fbf8ec"/>
+<rect x="135" y="129" width="930" height="0.5" fill="#d8d6c4"/>
+
+<rect x="160" y="95" width="22" height="22" rx="5" fill="#181712"/>
+<text x="171" y="111" text-anchor="middle" font-family="Georgia, serif" font-size="15" font-weight="700" fill="#ff5b1f">F</text>
+<circle cx="185" cy="98" r="3" fill="#ff5b1f"/>
+<text x="194" y="111" font-family="Georgia, serif" font-size="15" font-weight="600" fill="#181712">Fink<tspan fill="#ff5b1f">.</tspan>io</text>
+
+<text x="290" y="111" font-family="Manrope, sans-serif" font-size="12" fill="#615c43">Почетна</text>
+<text x="345" y="111" font-family="Manrope, sans-serif" font-size="12" font-weight="500" fill="#181712">Квизови</text>
+<rect x="345" y="116" width="55" height="2" fill="#ff5b1f"/>
+<text x="410" y="111" font-family="Manrope, sans-serif" font-size="12" fill="#615c43">Бази</text>
+<text x="450" y="111" font-family="Manrope, sans-serif" font-size="12" fill="#615c43">Ранг листа</text>
+<text x="520" y="111" font-family="Manrope, sans-serif" font-size="12" fill="#615c43">Пријатели</text>
+
+<circle cx="930" cy="103" r="8" fill="none" stroke="#615c43" stroke-width="1"/>
+<circle cx="960" cy="103" r="8" fill="none" stroke="#615c43" stroke-width="1"/>
+<circle cx="966" cy="98" r="3.5" fill="#ff5b1f"/>
+<text x="966" y="101" text-anchor="middle" font-family="Manrope, sans-serif" font-size="7" font-weight="700" fill="#fff">2</text>
+<rect x="985" y="94" width="18" height="18" rx="4" fill="url(#oG)"/>
+<text x="994" y="107" text-anchor="middle" font-family="Manrope, sans-serif" font-size="10" font-weight="600" fill="#fff">М</text>
+<text x="1010" y="108" font-family="Manrope, sans-serif" font-size="11" fill="#181712">марко</text>
+
+<text x="170" y="170" font-family="Manrope, sans-serif" font-size="9" font-weight="500" fill="#615c43">← НАЗАД НА КВИЗОВИ</text>
+
+<rect x="170" y="190" width="860" height="6" rx="3" fill="#ecebe2"/>
+<rect x="170" y="190" width="430" height="6" rx="3" fill="url(#oG)"/>
+
+<text x="170" y="218" font-family="Manrope, sans-serif" font-size="10" fill="#615c43">Прашање 8 од 15</text>
+<text x="1030" y="218" text-anchor="end" font-family="Manrope, sans-serif" font-size="10" fill="#615c43">Заработени поени: <tspan font-weight="600" fill="#ff5b1f">70</tspan></text>
+
+<rect x="170" y="240" width="860" height="370" rx="16" fill="#fffdf4" stroke="#d8d6c4" stroke-width="0.5"/>
+
+<rect x="195" y="265" width="100" height="20" rx="10" fill="#fde6dc"/>
+<text x="245" y="278" text-anchor="middle" font-family="Manrope, sans-serif" font-size="10" font-weight="500" fill="#ff5b1f">АПС / ПАПС</text>
+<rect x="300" y="265" width="80" height="20" rx="10" fill="#ecebe2"/>
+<text x="340" y="278" text-anchor="middle" font-family="Manrope, sans-serif" font-size="10" fill="#615c43">Средно</text>
+<rect x="385" y="265" width="100" height="20" rx="10" fill="#ecebe2"/>
+<text x="435" y="278" text-anchor="middle" font-family="Manrope, sans-serif" font-size="10" fill="#615c43">Еден точен</text>
+
+<text x="195" y="320" font-family="Georgia, serif" font-size="22" font-weight="600" fill="#181712">Која е временската сложеност на</text>
+<text x="195" y="348" font-family="Georgia, serif" font-size="22" font-weight="600" fill="#181712">Quicksort алгоритмот во <tspan font-style="italic" fill="#ff5b1f">најлошиот</tspan> случај?</text>
+
+<rect x="195" y="380" width="395" height="48" rx="12" fill="#fbf8ec" stroke="#d8d6c4" stroke-width="0.5"/>
+<rect x="210" y="397" width="14" height="14" rx="7" fill="none" stroke="#9a9476" stroke-width="1"/>
+<text x="235" y="408" font-family="Manrope, sans-serif" font-size="13" fill="#181712">O(n log n)</text>
+
+<rect x="610" y="380" width="395" height="48" rx="12" fill="#fffdf4" stroke="#ff5b1f" stroke-width="2"/>
+<circle cx="624" cy="404" r="8" fill="url(#oG)"/>
+<text x="624" y="409" text-anchor="middle" font-family="Manrope, sans-serif" font-size="11" font-weight="700" fill="#fff">✓</text>
+<text x="643" y="408" font-family="Manrope, sans-serif" font-weight="600" font-size="13" fill="#181712">O(n²)</text>
+<rect x="970" y="395" width="22" height="18" rx="9" fill="url(#oG)"/>
+<text x="981" y="408" text-anchor="middle" font-family="Manrope, sans-serif" font-size="9" font-weight="500" fill="#fff">избрано</text>
+
+<rect x="195" y="440" width="395" height="48" rx="12" fill="#fbf8ec" stroke="#d8d6c4" stroke-width="0.5"/>
+<rect x="210" y="457" width="14" height="14" rx="7" fill="none" stroke="#9a9476" stroke-width="1"/>
+<text x="235" y="468" font-family="Manrope, sans-serif" font-size="13" fill="#181712">O(n)</text>
+
+<rect x="610" y="440" width="395" height="48" rx="12" fill="#fbf8ec" stroke="#d8d6c4" stroke-width="0.5"/>
+<rect x="625" y="457" width="14" height="14" rx="7" fill="none" stroke="#9a9476" stroke-width="1"/>
+<text x="650" y="468" font-family="Manrope, sans-serif" font-size="13" fill="#181712">O(log n)</text>
+
+<rect x="195" y="510" width="810" height="50" rx="12" fill="#fde6dc" fill-opacity="0.5"/>
+<text x="210" y="530" font-family="Manrope, sans-serif" font-size="11" font-weight="500" fill="#ff5b1f">💡 Совет</text>
+<text x="210" y="548" font-family="Manrope, sans-serif" font-size="11" fill="#615c43">Размисли за случај кога pivot-от секогаш е најмал или најголем елемент во низата.</text>
+
+<rect x="195" y="580" width="120" height="38" rx="10" fill="#fbf8ec" stroke="#d8d6c4" stroke-width="0.5"/>
+<text x="255" y="603" text-anchor="middle" font-family="Manrope, sans-serif" font-size="11" font-weight="500" fill="#615c43">← Прескокни</text>
+
+<rect x="850" y="580" width="155" height="38" rx="10" fill="url(#oG)"/>
+<text x="927" y="603" text-anchor="middle" font-family="Manrope, sans-serif" font-size="12" font-weight="500" fill="#fff">Потврди одговор →</text>
+</g>
+
+<text x="600" y="745" text-anchor="middle" font-family="Manrope, sans-serif" font-size="13" font-weight="500" fill="#615c43">Играње квиз</text>
+</svg>

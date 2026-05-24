@@ -1,0 +1,168 @@
+<svg width="1000" height="800" viewBox="0 0 1000 800" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<linearGradient id="lightBg3" x1="0%" y1="0%" x2="100%" y2="100%">
+<stop offset="0%" stop-color="#fbf8ec"/>
+<stop offset="100%" stop-color="#f5f0e1"/>
+</linearGradient>
+<linearGradient id="orange3" x1="0%" y1="0%" x2="100%" y2="100%">
+<stop offset="0%" stop-color="#ff7a3f"/>
+<stop offset="100%" stop-color="#c43d0a"/>
+</linearGradient>
+<radialGradient id="glow3" cx="50%" cy="50%" r="50%">
+<stop offset="0%" stop-color="#ff5b1f" stop-opacity="0.22"/>
+<stop offset="100%" stop-color="#ff5b1f" stop-opacity="0"/>
+</radialGradient>
+<clipPath id="phoneA"><rect x="80" y="80" width="280" height="600" rx="22"/></clipPath>
+<clipPath id="phoneB"><rect x="500" y="80" width="280" height="600" rx="22"/></clipPath>
+</defs>
+
+<rect width="1000" height="800" fill="url(#lightBg3)"/>
+<circle cx="220" cy="200" r="220" fill="url(#glow3)"/>
+<circle cx="780" cy="600" r="220" fill="url(#glow3)"/>
+
+<!-- PHONE A — Profile -->
+<g>
+<rect x="60" y="60" width="320" height="640" rx="36" fill="#181712"/>
+<rect x="170" y="70" width="100" height="14" rx="7" fill="#0c0b08"/>
+<rect x="80" y="80" width="280" height="600" rx="22" fill="#fbf8ec"/>
+
+<g clip-path="url(#phoneA)">
+<text x="100" y="103" font-family="Manrope, sans-serif" font-size="11" font-weight="600" fill="#181712">9:41</text>
+<rect x="328" y="96" width="16" height="8" rx="1.5" fill="none" stroke="#181712" stroke-width="0.7"/>
+<rect x="329" y="97" width="13" height="6" rx="0.5" fill="#181712"/>
+
+<rect x="80" y="115" width="280" height="42" fill="#fbf8ec"/>
+<text x="100" y="143" font-family="Manrope, sans-serif" font-size="9" font-weight="500" fill="#615c43">ПРОФИЛ</text>
+
+<rect x="100" y="165" width="240" height="148" rx="14" fill="#181712"/>
+<circle cx="285" cy="180" r="50" fill="#ff5b1f" fill-opacity="0.2"/>
+<rect x="116" y="182" width="58" height="58" rx="14" fill="url(#orange3)"/>
+<text x="145" y="223" text-anchor="middle" font-family="Georgia, serif" font-size="28" font-weight="700" fill="#fff">М</text>
+<rect x="184" y="186" width="58" height="14" rx="7" fill="url(#orange3)"/>
+<text x="213" y="196" text-anchor="middle" font-family="Manrope, sans-serif" font-size="8" font-weight="500" fill="#fff">Студент</text>
+<rect x="246" y="186" width="70" height="14" rx="7" fill="#ffffff" fill-opacity="0.1"/>
+<text x="281" y="196" text-anchor="middle" font-family="Manrope, sans-serif" font-size="8" fill="#fbf8ec">Трета година</text>
+<text x="184" y="218" font-family="Georgia, serif" font-size="18" font-weight="600" fill="#fbf8ec">марко</text>
+<text x="184" y="234" font-family="Manrope, sans-serif" font-size="8" fill="#ff5b1f">📚 Study mode</text>
+<text x="184" y="247" font-family="Manrope, sans-serif" font-size="8" fill="#bab69e">SIIS · ФИНКИ</text>
+
+<text x="116" y="285" font-family="Manrope, sans-serif" font-size="7" fill="#bab69e">📅 Член од Мај 2025</text>
+<text x="116" y="299" font-family="Manrope, sans-serif" font-size="7" fill="#fbf8ec">👥 14 пријатели</text>
+
+<rect x="100" y="325" width="115" height="62" rx="10" fill="url(#orange3)"/>
+<text x="115" y="343" font-family="Manrope, sans-serif" font-size="11" fill="#fff">⌘</text>
+<text x="115" y="370" font-family="Georgia, serif" font-size="22" font-weight="600" fill="#fff">2,840</text>
+<text x="115" y="382" font-family="Manrope, sans-serif" font-size="7" font-weight="500" fill="#fff">ПОЕНИ</text>
+
+<rect x="225" y="325" width="115" height="62" rx="10" fill="#fffdf4" stroke="#d8d6c4" stroke-width="0.5"/>
+<text x="240" y="343" font-family="Manrope, sans-serif" font-size="11" fill="#ff5b1f">◎</text>
+<text x="240" y="370" font-family="Georgia, serif" font-size="22" font-weight="600" fill="#181712">82%</text>
+<text x="240" y="382" font-family="Manrope, sans-serif" font-size="7" font-weight="500" fill="#615c43">ПРОС. СКОР</text>
+
+<rect x="100" y="395" width="115" height="62" rx="10" fill="#fffdf4" stroke="#d8d6c4" stroke-width="0.5"/>
+<text x="115" y="413" font-family="Manrope, sans-serif" font-size="11" fill="#ff5b1f">▤</text>
+<text x="115" y="440" font-family="Georgia, serif" font-size="22" font-weight="600" fill="#181712">47</text>
+<text x="115" y="452" font-family="Manrope, sans-serif" font-size="7" font-weight="500" fill="#615c43">ИГРАНИ</text>
+
+<rect x="225" y="395" width="115" height="62" rx="10" fill="#fffdf4" stroke="#d8d6c4" stroke-width="0.5"/>
+<text x="240" y="413" font-family="Manrope, sans-serif" font-size="11" fill="#ff5b1f">🔥</text>
+<text x="240" y="440" font-family="Georgia, serif" font-size="22" font-weight="600" fill="#181712">12</text>
+<text x="240" y="452" font-family="Manrope, sans-serif" font-size="7" font-weight="500" fill="#615c43">СЕРИЈА д.</text>
+
+<text x="100" y="487" font-family="Georgia, serif" font-size="14" font-weight="600" fill="#181712">Беџови</text>
+<text x="338" y="487" text-anchor="end" font-family="Manrope, sans-serif" font-size="8" fill="#ff5b1f">8 / 14 · сите →</text>
+
+<rect x="100" y="497" width="55" height="62" rx="10" fill="#fde6dc"/>
+<text x="127" y="520" text-anchor="middle" font-size="20">🎯</text>
+<text x="127" y="540" text-anchor="middle" font-family="Georgia, serif" font-size="7" font-weight="600" fill="#993c1d">Решавач</text>
+
+<rect x="160" y="497" width="55" height="62" rx="10" fill="#fdf6d6"/>
+<text x="187" y="520" text-anchor="middle" font-size="20">🏆</text>
+<text x="187" y="540" text-anchor="middle" font-family="Georgia, serif" font-size="7" font-weight="600" fill="#854f0b">Шампион</text>
+
+<rect x="220" y="497" width="55" height="62" rx="10" fill="#fde6dc"/>
+<text x="247" y="520" text-anchor="middle" font-size="20">🔥</text>
+<text x="247" y="540" text-anchor="middle" font-family="Georgia, serif" font-size="7" font-weight="600" fill="#993c1d">Серија</text>
+
+<rect x="280" y="497" width="55" height="62" rx="10" fill="#fde6dc"/>
+<text x="307" y="520" text-anchor="middle" font-size="20">⭐</text>
+<text x="307" y="540" text-anchor="middle" font-family="Georgia, serif" font-size="7" font-weight="600" fill="#993c1d">Ученик</text>
+
+<text x="100" y="585" font-family="Georgia, serif" font-size="13" font-weight="600" fill="#181712">Подесувања</text>
+<rect x="100" y="595" width="240" height="36" rx="10" fill="#fffdf4" stroke="#d8d6c4" stroke-width="0.5"/>
+<text x="120" y="617" text-anchor="middle" font-size="10" fill="#ff5b1f">↑</text>
+<text x="138" y="617" font-family="Manrope, sans-serif" font-size="10" font-weight="500" fill="#181712">Промени аватар</text>
+<rect x="100" y="635" width="240" height="36" rx="10" fill="#fffdf4" stroke="#d8d6c4" stroke-width="0.5"/>
+<text x="120" y="657" text-anchor="middle" font-size="10" fill="#ff5b1f">📚</text>
+<text x="138" y="657" font-family="Manrope, sans-serif" font-size="10" font-weight="500" fill="#181712">Мои предмети</text>
+</g>
+
+<text x="220" y="745" text-anchor="middle" font-family="Georgia, serif" font-size="18" font-weight="600" fill="#181712">Профил</text>
+</g>
+
+<!-- PHONE B — Chat -->
+<g>
+<rect x="480" y="60" width="320" height="640" rx="36" fill="#181712"/>
+<rect x="590" y="70" width="100" height="14" rx="7" fill="#0c0b08"/>
+<rect x="500" y="80" width="280" height="600" rx="22" fill="#fbf8ec"/>
+
+<g clip-path="url(#phoneB)">
+<text x="520" y="103" font-family="Manrope, sans-serif" font-size="11" font-weight="600" fill="#181712">9:41</text>
+<rect x="748" y="96" width="16" height="8" rx="1.5" fill="none" stroke="#181712" stroke-width="0.7"/>
+<rect x="749" y="97" width="13" height="6" rx="0.5" fill="#181712"/>
+
+<rect x="500" y="115" width="280" height="58" fill="#fbf8ec"/>
+<rect x="500" y="172" width="280" height="0.5" fill="#d8d6c4"/>
+<text x="515" y="138" font-family="Manrope, sans-serif" font-size="14" fill="#615c43">‹</text>
+<rect x="528" y="125" width="34" height="34" rx="10" fill="url(#orange3)"/>
+<text x="545" y="148" text-anchor="middle" font-family="Georgia, serif" font-size="14" font-weight="700" fill="#fff">А</text>
+<circle cx="555" cy="156" r="5" fill="#22c55e" stroke="#fbf8ec" stroke-width="2"/>
+<text x="572" y="143" font-family="Manrope, sans-serif" font-size="12" font-weight="600" fill="#181712">ана</text>
+<text x="572" y="156" font-family="Manrope, sans-serif" font-size="9" fill="#22c55e">● Онлајн</text>
+
+<rect x="528" y="190" width="22" height="22" rx="6" fill="url(#orange3)"/>
+<text x="539" y="206" text-anchor="middle" font-family="Georgia, serif" font-size="10" font-weight="700" fill="#fff">А</text>
+<rect x="555" y="190" width="148" height="32" rx="14" fill="#fffdf4" stroke="#d8d6c4" stroke-width="0.5"/>
+<text x="565" y="204" font-family="Manrope, sans-serif" font-size="10" fill="#181712">Здраво! Како е АПС</text>
+<text x="565" y="216" font-family="Manrope, sans-serif" font-size="10" fill="#181712">испитот? 📚</text>
+<text x="555" y="232" font-family="Manrope, sans-serif" font-size="7" fill="#9a9476">14:22</text>
+
+<rect x="595" y="245" width="180" height="32" rx="14" fill="url(#orange3)"/>
+<text x="608" y="259" font-family="Manrope, sans-serif" font-size="10" fill="#fff">Леле, тешко беше...</text>
+<text x="608" y="271" font-family="Manrope, sans-serif" font-size="10" fill="#fff">најмногу графови</text>
+<text x="775" y="287" text-anchor="end" font-family="Manrope, sans-serif" font-size="7" fill="#9a9476">14:23 ✓✓</text>
+
+<rect x="528" y="300" width="22" height="22" rx="6" fill="url(#orange3)"/>
+<text x="539" y="316" text-anchor="middle" font-family="Georgia, serif" font-size="10" font-weight="700" fill="#fff">А</text>
+<rect x="555" y="300" width="200" height="46" rx="14" fill="#fffdf4" stroke="#d8d6c4" stroke-width="0.5"/>
+<text x="565" y="314" font-family="Manrope, sans-serif" font-size="10" fill="#181712">Ох не 😅 Имам</text>
+<text x="565" y="326" font-family="Manrope, sans-serif" font-size="10" fill="#181712">прикачен квиз од</text>
+<text x="565" y="338" font-family="Manrope, sans-serif" font-size="10" fill="#181712">прошлата година ако сакаш</text>
+
+<rect x="615" y="358" width="160" height="32" rx="14" fill="url(#orange3)"/>
+<text x="628" y="372" font-family="Manrope, sans-serif" font-size="10" fill="#fff">Дааа благодарам!</text>
+<text x="628" y="384" font-family="Manrope, sans-serif" font-size="10" fill="#fff">пошти ми линк 🙏</text>
+<text x="775" y="400" text-anchor="end" font-family="Manrope, sans-serif" font-size="7" fill="#9a9476">14:24 ✓✓</text>
+
+<rect x="528" y="412" width="22" height="22" rx="6" fill="url(#orange3)"/>
+<text x="539" y="428" text-anchor="middle" font-family="Georgia, serif" font-size="10" font-weight="700" fill="#fff">А</text>
+<rect x="555" y="412" width="210" height="76" rx="14" fill="#fffdf4" stroke="#d8d6c4" stroke-width="0.5"/>
+<rect x="565" y="422" width="190" height="42" rx="8" fill="#fde6dc"/>
+<text x="572" y="436" font-family="Manrope, sans-serif" font-size="7" font-weight="600" fill="#ff5b1f">КВИЗ</text>
+<text x="572" y="449" font-family="Georgia, serif" font-size="9" font-weight="600" fill="#181712">АПС — Графови</text>
+<text x="572" y="459" font-family="Manrope, sans-serif" font-size="6" fill="#615c43">18 прашања · ❤ 87 · ✦ AI</text>
+<text x="565" y="477" font-family="Manrope, sans-serif" font-size="9" fill="#181712">Ова е она од минатата!</text>
+
+<text x="528" y="510" font-family="Manrope, sans-serif" font-size="9" font-style="italic" fill="#615c43">● ● ● ана пишува…</text>
+
+<rect x="500" y="617" width="280" height="63" fill="#fbf8ec"/>
+<rect x="500" y="617" width="280" height="0.5" fill="#d8d6c4"/>
+<rect x="515" y="629" width="220" height="36" rx="18" fill="#fffdf4" stroke="#d8d6c4" stroke-width="0.5"/>
+<text x="525" y="651" font-family="Manrope, sans-serif" font-size="10" fill="#9a9476">Напиши порака...</text>
+<rect x="745" y="635" width="24" height="24" rx="12" fill="url(#orange3)"/>
+<text x="757" y="650" text-anchor="middle" font-family="Manrope, sans-serif" font-size="11" font-weight="600" fill="#fff">→</text>
+</g>
+
+<text x="640" y="745" text-anchor="middle" font-family="Georgia, serif" font-size="18" font-weight="600" fill="#181712">Чет</text>
+</g>
+</svg>

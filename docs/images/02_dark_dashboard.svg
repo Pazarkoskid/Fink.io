@@ -1,0 +1,113 @@
+<svg width="1200" height="720" viewBox="0 0 1200 720" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<linearGradient id="darkBg" x1="0%" y1="0%" x2="100%" y2="100%">
+<stop offset="0%" stop-color="#1a1814"/>
+<stop offset="100%" stop-color="#0c0b08"/>
+</linearGradient>
+<linearGradient id="orange2" x1="0%" y1="0%" x2="100%" y2="100%">
+<stop offset="0%" stop-color="#ff7a3f"/>
+<stop offset="100%" stop-color="#c43d0a"/>
+</linearGradient>
+<radialGradient id="orangeGlow" cx="50%" cy="50%" r="50%">
+<stop offset="0%" stop-color="#ff5b1f" stop-opacity="0.4"/>
+<stop offset="100%" stop-color="#ff5b1f" stop-opacity="0"/>
+</radialGradient>
+<clipPath id="screen2"><rect x="155" y="100" width="900" height="540" rx="6"/></clipPath>
+</defs>
+<rect width="1200" height="720" fill="url(#darkBg)"/>
+<circle cx="100" cy="100" r="240" fill="url(#orangeGlow)"/>
+<circle cx="1100" cy="650" r="220" fill="url(#orangeGlow)"/>
+<path d="M 100 670 L 1100 670 L 1130 705 L 70 705 Z" fill="#2a2820"/>
+<rect x="570" y="670" width="60" height="6" rx="2" fill="#0c0b08"/>
+<rect x="125" y="75" width="950" height="595" rx="10" fill="#181712"/>
+<rect x="155" y="100" width="900" height="540" rx="6" fill="#0c0b08"/>
+<circle cx="600" cy="88" r="2.5" fill="#444441"/>
+<g clip-path="url(#screen2)">
+<rect x="155" y="100" width="900" height="48" fill="#181712" fill-opacity="0.85"/>
+<rect x="155" y="147" width="900" height="0.5" fill="#454232"/>
+<rect x="180" y="115" width="20" height="20" rx="4" fill="#181712" stroke="#444441" stroke-width="0.5"/>
+<text x="190" y="130" text-anchor="middle" font-family="Georgia, serif" font-size="14" font-weight="700" fill="#ff5b1f">F</text>
+<circle cx="203" cy="118" r="2.5" fill="#ff5b1f"/>
+<text x="212" y="130" font-family="Georgia, serif" font-size="14" font-weight="600" fill="#fbf8ec">Fink<tspan fill="#ff5b1f">.</tspan>io</text>
+<text x="310" y="130" font-family="Arial, sans-serif" font-size="11" fill="#bab69e">Почетна</text>
+<text x="365" y="130" font-family="Arial, sans-serif" font-size="11" fill="#bab69e">Квизови</text>
+<text x="418" y="130" font-family="Arial, sans-serif" font-size="11" fill="#bab69e">Бази</text>
+<text x="450" y="130" font-family="Arial, sans-serif" font-size="11" font-weight="500" fill="#fbf8ec">Командна табла</text>
+<rect x="450" y="135" width="80" height="2" fill="#ff5b1f"/>
+<text x="540" y="130" font-family="Arial, sans-serif" font-size="11" fill="#bab69e">Пораки</text>
+<circle cx="920" cy="123" r="7" fill="none" stroke="#bab69e" stroke-width="1"/>
+<circle cx="945" cy="123" r="7" fill="none" stroke="#bab69e" stroke-width="1"/>
+<circle cx="970" cy="123" r="7" fill="none" stroke="#bab69e" stroke-width="1"/>
+<circle cx="976" cy="118" r="3.5" fill="#ff5b1f"/>
+<text x="976" y="121" text-anchor="middle" font-family="Arial, sans-serif" font-size="7" font-weight="700" fill="#fff">3</text>
+<rect x="990" y="115" width="16" height="16" rx="3" fill="url(#orange2)"/>
+<text x="998" y="127" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="600" fill="#fff">М</text>
+<text x="1010" y="128" font-family="Arial, sans-serif" font-size="10" fill="#fbf8ec">марко</text>
+<text x="1042" y="128" font-family="Arial, sans-serif" font-size="9" fill="#bab69e">▾</text>
+<text x="180" y="190" font-family="Arial, sans-serif" font-size="9" font-weight="500" fill="#bab69e">ИНСТРУКТОР</text>
+<text x="180" y="220" font-family="Georgia, serif" font-size="28" font-weight="600" fill="#fbf8ec">Командна табла</text>
+<rect x="940" y="195" width="100" height="32" rx="8" fill="url(#orange2)"/>
+<text x="990" y="216" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="500" fill="#fff">↑ Прикачи</text>
+<rect x="180" y="250" width="200" height="100" rx="14" fill="url(#orange2)"/>
+<rect x="195" y="265" width="20" height="20" rx="5" fill="#ffffff" fill-opacity="0.18"/>
+<text x="205" y="280" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#fff">▤</text>
+<text x="195" y="316" font-family="Georgia, serif" font-size="32" font-weight="600" fill="#fff">12</text>
+<text x="195" y="335" font-family="Arial, sans-serif" font-size="9" font-weight="500" fill="#fff">ОБЈАВЕНИ</text>
+<rect x="395" y="250" width="200" height="100" rx="14" fill="#1a1814" stroke="#454232" stroke-width="0.5"/>
+<rect x="410" y="265" width="20" height="20" rx="5" fill="#fde6dc" fill-opacity="0.15"/>
+<text x="420" y="280" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#ff5b1f">○</text>
+<text x="410" y="316" font-family="Georgia, serif" font-size="32" font-weight="600" fill="#fbf8ec">5</text>
+<text x="410" y="335" font-family="Arial, sans-serif" font-size="9" font-weight="500" fill="#bab69e">НАЦРТИ</text>
+<rect x="610" y="250" width="200" height="100" rx="14" fill="#1a1814" stroke="#454232" stroke-width="0.5"/>
+<rect x="625" y="265" width="20" height="20" rx="5" fill="#fde6dc" fill-opacity="0.15"/>
+<text x="635" y="280" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#ff5b1f">⟳</text>
+<text x="625" y="316" font-family="Georgia, serif" font-size="32" font-weight="600" fill="#fbf8ec">87</text>
+<text x="625" y="335" font-family="Arial, sans-serif" font-size="9" font-weight="500" fill="#bab69e">МОИ ИГРИ</text>
+<rect x="825" y="250" width="200" height="100" rx="14" fill="#1a1814" stroke="#454232" stroke-width="0.5"/>
+<rect x="840" y="265" width="20" height="20" rx="5" fill="#fde6dc" fill-opacity="0.15"/>
+<text x="850" y="282" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#ff5b1f">♥</text>
+<text x="840" y="316" font-family="Georgia, serif" font-size="32" font-weight="600" fill="#fbf8ec">423</text>
+<text x="840" y="335" font-family="Arial, sans-serif" font-size="9" font-weight="500" fill="#bab69e">ЛАЈКОВИ</text>
+<rect x="180" y="380" width="845" height="0.5" fill="#454232"/>
+<text x="200" y="395" font-family="Arial, sans-serif" font-size="11" font-weight="500" fill="#fbf8ec">▤ Преглед</text>
+<rect x="180" y="402" width="80" height="2" fill="#ff5b1f"/>
+<text x="290" y="395" font-family="Arial, sans-serif" font-size="11" fill="#bab69e">○ Нацрти</text>
+<rect x="345" y="386" width="16" height="10" rx="5" fill="#444441"/>
+<text x="353" y="394" text-anchor="middle" font-family="Arial, sans-serif" font-size="7" font-weight="600" fill="#fbf8ec">5</text>
+<text x="380" y="395" font-family="Arial, sans-serif" font-size="11" fill="#bab69e">▥ Објавени</text>
+<text x="470" y="395" font-family="Arial, sans-serif" font-size="11" fill="#bab69e">⟳ Мои игри</text>
+<text x="560" y="395" font-family="Arial, sans-serif" font-size="11" fill="#bab69e">▦ Материјали</text>
+<text x="180" y="440" font-family="Georgia, serif" font-size="20" font-weight="600" fill="#fbf8ec">🏆 Најпопуларни мои квизови</text>
+<rect x="180" y="460" width="845" height="60" rx="12" fill="#1a1814" stroke="#454232" stroke-width="0.5"/>
+<rect x="195" y="470" width="40" height="14" rx="7" fill="url(#orange2)"/>
+<text x="215" y="480" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" font-weight="500" fill="#fff">ОБЈАВЕН</text>
+<rect x="241" y="470" width="20" height="14" rx="7" fill="#fde6dc" fill-opacity="0.15"/>
+<text x="251" y="480" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" font-weight="500" fill="#ff5b1f">AI</text>
+<rect x="267" y="470" width="120" height="14" rx="7" fill="none" stroke="#454232" stroke-width="0.5"/>
+<text x="327" y="480" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="#bab69e">АПС / ПАПС</text>
+<text x="195" y="502" font-family="Georgia, serif" font-size="14" font-weight="600" fill="#fbf8ec">Сортирање — Quicksort и MergeSort</text>
+<text x="195" y="515" font-family="Arial, sans-serif" font-size="9" fill="#bab69e">15 прашања · 234 игри · ♥ 87</text>
+<rect x="900" y="478" width="34" height="22" rx="6" fill="url(#orange2)"/>
+<text x="917" y="492" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" font-weight="500" fill="#fff">▶</text>
+<rect x="940" y="478" width="34" height="22" rx="6" fill="#1a1814" stroke="#454232" stroke-width="0.5"/>
+<text x="957" y="492" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#bab69e">✎</text>
+<rect x="980" y="478" width="34" height="22" rx="6" fill="#1a1814" stroke="#454232" stroke-width="0.5"/>
+<text x="997" y="494" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#bab69e">⚏</text>
+<rect x="180" y="530" width="845" height="60" rx="12" fill="#1a1814" stroke="#454232" stroke-width="0.5"/>
+<rect x="195" y="540" width="40" height="14" rx="7" fill="url(#orange2)"/>
+<text x="215" y="550" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" font-weight="500" fill="#fff">ОБЈАВЕН</text>
+<rect x="241" y="540" width="20" height="14" rx="7" fill="#fde6dc" fill-opacity="0.15"/>
+<text x="251" y="550" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" font-weight="500" fill="#ff5b1f">AI</text>
+<rect x="267" y="540" width="140" height="14" rx="7" fill="none" stroke="#454232" stroke-width="0.5"/>
+<text x="337" y="550" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="#bab69e">Бази на податоци</text>
+<text x="195" y="572" font-family="Georgia, serif" font-size="14" font-weight="600" fill="#fbf8ec">SQL нормализација и индексирање</text>
+<text x="195" y="585" font-family="Arial, sans-serif" font-size="9" fill="#bab69e">22 прашања · 198 игри · ♥ 73</text>
+<rect x="900" y="548" width="34" height="22" rx="6" fill="url(#orange2)"/>
+<text x="917" y="562" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" font-weight="500" fill="#fff">▶</text>
+<rect x="940" y="548" width="34" height="22" rx="6" fill="#1a1814" stroke="#454232" stroke-width="0.5"/>
+<text x="957" y="562" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#bab69e">✎</text>
+<rect x="980" y="548" width="34" height="22" rx="6" fill="#1a1814" stroke="#454232" stroke-width="0.5"/>
+<text x="997" y="564" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#bab69e">⚏</text>
+</g>
+<text x="600" y="700" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="500" fill="#bab69e">Dark mode · Командна табла</text>
+</svg>
