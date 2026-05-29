@@ -180,56 +180,69 @@ export default function QuizPlay() {
             )}
           </div>
 
-          {/* Nav */}
-          <div className="flex items-center justify-between gap-4">
-            <button
-              type="button"
-              onClick={() => setIdx(Math.max(0, idx - 1))}
-              disabled={idx === 0}
-              className="btn-secondary disabled:opacity-30 disabled:cursor-not-allowed"
-            >
-              <ChevronLeft size={16} /> Претходно
-            </button>
+          {/* Nav: Top row = Back/Next, Bottom row = numbered question buttons */}
+          <div className="space-y-4">
+            {/* Top: back / forward */}
+            <div className="flex items-center justify-between gap-4">
+              <button
+                type="button"
+                onClick={() => setIdx(Math.max(0, idx - 1))}
+                disabled={idx === 0}
+                className="btn-secondary disabled:opacity-30 disabled:cursor-not-allowed"
+              >
+                <ChevronLeft size={16} /> Претходно
+              </button>
 
-            <div className="flex flex-wrap gap-1.5 max-w-md justify-center">
-              {questions.map((q, i) => {
-                const isAnswered = answers[q.id]
-                  && ((answers[q.id].choice_ids && answers[q.id].choice_ids.length)
-                      || (answers[q.id].text && answers[q.id].text.trim()))
-                return (
-                  <button
-                    key={q.id}
-                    type="button"
-                    onClick={() => setIdx(i)}
-                    className={`w-8 h-8 border-2 font-mono text-xs
-                      ${i === idx ? 'border-accent bg-accent text-white'
-                        : isAnswered ? 'border-border bg-accent text-white'
-                        : 'border-border bg-bg'}`}
-                  >
-                    {i + 1}
-                  </button>
-                )
-              })}
+              {idx < total - 1 ? (
+                <button
+                  type="button"
+                  onClick={() => setIdx(idx + 1)}
+                  className="btn-primary"
+                >
+                  Следно <ChevronRight size={16} />
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  onClick={submit}
+                  disabled={submitting}
+                  className="btn-accent disabled:opacity-50"
+                >
+                  {submitting ? 'Се испраќа...' : <>Заврши <Send size={16} /></>}
+                </button>
+              )}
             </div>
 
-            {idx < total - 1 ? (
-              <button
-                type="button"
-                onClick={() => setIdx(idx + 1)}
-                className="btn-primary"
-              >
-                Следно <ChevronRight size={16} />
-              </button>
-            ) : (
-              <button
-                type="button"
-                onClick={submit}
-                disabled={submitting}
-                className="btn-accent disabled:opacity-50"
-              >
-                {submitting ? 'Се испраќа...' : <>Заврши <Send size={16} /></>}
-              </button>
-            )}
+            {/* Bottom: numbered question buttons */}
+            <div className="border-t border-border pt-4">
+              <p className="font-mono text-xs uppercase tracking-widest text-muted mb-2 text-center">
+                Скокни на прашање
+              </p>
+              <div className="flex flex-wrap gap-2 justify-center">
+                {questions.map((q, i) => {
+                  const isAnswered = answers[q.id]
+                    && ((answers[q.id].choice_ids && answers[q.id].choice_ids.length)
+                        || (answers[q.id].text && answers[q.id].text.trim()))
+                  const isCurrent = i === idx
+                  return (
+                    <button
+                      key={q.id}
+                      type="button"
+                      onClick={() => setIdx(i)}
+                      title={`Прашање ${i + 1}${isAnswered ? ' (одговорено)' : ''}`}
+                      className={`w-10 h-10 border-2 font-mono text-sm font-semibold transition-all
+                        ${isCurrent
+                          ? 'border-accent bg-accent text-white scale-110'
+                          : isAnswered
+                          ? 'border-green-700 bg-green-700/20 text-green-700'
+                          : 'border-border bg-bg text-muted hover:border-muted'}`}
+                    >
+                      {i + 1}
+                    </button>
+                  )
+                })}
+              </div>
+            </div>
           </div>
         </div>
       </div>

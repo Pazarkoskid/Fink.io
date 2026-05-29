@@ -84,24 +84,43 @@ export default function QuizResult() {
 
                 {/* Show options for single/multiple, text for essay */}
                 {r.type !== 'essay' ? (
-                  <div className="ml-11 space-y-1.5 mb-3">
-                    {/* Just show user's answers and correct ones */}
-                    <div className="flex flex-wrap gap-x-4 gap-y-1 font-mono text-xs">
-                      <div>
-                        <span className="text-muted">Твој одговор: </span>
-                        <span className={isCorrect ? 'text-green-700' : 'text-accent'}>
-                          {r.user_choice_ids.length ? `опции ${r.user_choice_ids.join(', ')}` : '— празно —'}
-                        </span>
+                  <div className="ml-11 space-y-2 mb-3">
+                    {/* Display all choices with checkmark/X to show what was selected vs correct */}
+                    {r.all_choices && r.all_choices.length > 0 && (
+                      <div className="space-y-1.5">
+                        {r.all_choices.map((choice, idx) => {
+                          const label = String.fromCharCode(1040 + idx) // А, Б, В, Г, Д ...
+                          const wasSelected = r.user_choice_ids.includes(choice.id)
+                          const isAnswerCorrect = choice.is_correct
+                          return (
+                            <div
+                              key={choice.id}
+                              className={`flex items-start gap-2 p-2 rounded text-sm border ${
+                                isAnswerCorrect
+                                  ? 'bg-green-700/10 border-green-700/40'
+                                  : wasSelected
+                                  ? 'bg-accent/10 border-accent/40'
+                                  : 'border-border bg-surface'
+                              }`}
+                            >
+                              <span className={`font-mono text-xs font-semibold shrink-0 mt-0.5 ${
+                                isAnswerCorrect ? 'text-green-700' : wasSelected ? 'text-accent' : 'text-muted'
+                              }`}>
+                                {label})
+                              </span>
+                              <span className={`flex-1 ${isAnswerCorrect ? 'text-fg font-medium' : 'text-fg'}`}>
+                                {choice.text}
+                              </span>
+                              <span className="shrink-0 text-xs font-mono">
+                                {isAnswerCorrect && wasSelected && <span className="text-green-700">✓ точно</span>}
+                                {isAnswerCorrect && !wasSelected && <span className="text-green-700">✓ точен одговор</span>}
+                                {!isAnswerCorrect && wasSelected && <span className="text-accent">✗ твој одговор</span>}
+                              </span>
+                            </div>
+                          )
+                        })}
                       </div>
-                      {!isCorrect && (
-                        <div>
-                          <span className="text-muted">Точно: </span>
-                          <span className="text-green-700">
-                            опции {r.correct_choice_ids.join(', ')}
-                          </span>
-                        </div>
-                      )}
-                    </div>
+                    )}
                   </div>
                 ) : (
                   <div className="ml-11 mb-3">

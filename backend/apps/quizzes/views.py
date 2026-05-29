@@ -457,6 +457,10 @@ class SubmitAttemptView(APIView):
                 'user_choice_ids': sorted(user_choices),
                 'user_text': user_text,
                 'correct_choice_ids': correct_choice_ids,
+                'all_choices': [
+                    {'id': c.id, 'text': c.text, 'is_correct': c.is_correct}
+                    for c in q.choices.all()
+                ] if q.type in ('single', 'multiple') else [],
                 'is_correct': is_correct,
                 'explanation': q.explanation,
                 'points': q.points if is_correct else 0,
