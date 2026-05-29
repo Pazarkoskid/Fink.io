@@ -1,5 +1,5 @@
 import { useEffect, useState, useMemo, useRef } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useSearchParams, useNavigate } from 'react-router-dom'
 import {
   authApi, quizzesApi, subjectsApi, mySubjectsApi, materialsApi,
 } from '../lib/api'
@@ -17,6 +17,9 @@ const FILE_ICONS = {
 export default function Profile() {
   const user = useAuth((s) => s.user)
   const hydrate = useAuth((s) => s.hydrate)
+  const navigate = useNavigate()
+  const [searchParams] = useSearchParams()
+  const returnTo = searchParams.get('return')
   const [form, setForm] = useState({
     username: '', bio: '', preferred_language: 'mk',
     current_year: '', study_program: '',
@@ -97,7 +100,12 @@ export default function Profile() {
       }
       setSavedMsg('Зачувано!')
       hydrate()
-      setTimeout(() => setSavedMsg(''), 2500)
+      // If we came from a public profile, return there after save
+      if (returnTo) {
+        setTimeout(() => navigate(returnTo), 700)
+      } else {
+        setTimeout(() => setSavedMsg(''), 2500)
+      }
     } catch (e) {
       setSavedMsg(e.response?.data?.detail || 'Грешка при зачувување.')
     } finally {
@@ -176,6 +184,20 @@ export default function Profile() {
       </div>
       <h1 className="font-display text-4xl mb-2">{user.username}</h1>
       <p className="badge-soft mb-8 inline-flex">{user.role}</p>
+
+      {returnTo && (
+        <div className="card mb-6 flex items-center justify-between gap-3 !py-3 !px-4 border-accent/40 bg-accent/5">
+          <p className="text-sm text-muted">
+            Уредуваш профил. По зачувување, ќе се вратиш на јавниот профил.
+          </p>
+          <Link
+            to={returnTo}
+            className="text-xs font-mono uppercase tracking-widest text-accent hover:underline shrink-0"
+          >
+            Откажи
+          </Link>
+        </div>
+      )}
 
       {/* Avatar + Settings */}
       <div className="card mb-6">

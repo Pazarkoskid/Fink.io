@@ -31,16 +31,34 @@ export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false)
   const menuRef = useRef(null)
 
-  // Close user menu when clicking outside
+  // Close user menu when clicking/tapping outside
   useEffect(() => {
     const handler = (e) => {
       if (menuRef.current && !menuRef.current.contains(e.target)) {
         setMenuOpen(false)
       }
     }
-    if (menuOpen) document.addEventListener('mousedown', handler)
-    return () => document.removeEventListener('mousedown', handler)
+    if (menuOpen) {
+      document.addEventListener('mousedown', handler)
+      document.addEventListener('touchstart', handler)
+    }
+    return () => {
+      document.removeEventListener('mousedown', handler)
+      document.removeEventListener('touchstart', handler)
+    }
   }, [menuOpen])
+
+  // Helper: open dropdown — closes mobile menu first
+  const openMenu = () => {
+    setMobileOpen(false)
+    setMenuOpen((v) => !v)
+  }
+
+  // Helper: open mobile menu — closes dropdown first
+  const openMobile = () => {
+    setMenuOpen(false)
+    setMobileOpen((v) => !v)
+  }
 
   const handleLogout = () => {
     logout()
@@ -99,7 +117,7 @@ export default function Header() {
             {user ? (
               <div className="relative" ref={menuRef}>
                 <button
-                  onClick={() => setMenuOpen(!menuOpen)}
+                  onClick={openMenu}
                   className="flex items-center gap-2 p-1.5 pr-3 rounded-xl hover:bg-fg/5 transition-colors"
                 >
                   <div className="w-8 h-8 rounded-lg overflow-hidden bg-gradient-to-br from-accent to-accent-dark flex items-center justify-center text-white font-bold text-sm shrink-0">
@@ -140,22 +158,12 @@ export default function Header() {
                       <MenuItem to={`/users/${user.id}`} icon={User} onClick={() => setMenuOpen(false)}>
                         Јавен профил
                       </MenuItem>
-                      <MenuItem to="/profile" icon={User} onClick={() => setMenuOpen(false)}>
-                        Подесувања
-                      </MenuItem>
                       <MenuItem
                         to="/friends"
                         icon={Users}
                         onClick={() => setMenuOpen(false)}
                       >
                         Пријатели
-                      </MenuItem>
-                      <MenuItem
-                        to="/messages"
-                        icon={MessageSquare}
-                        onClick={() => setMenuOpen(false)}
-                      >
-                        Пораки
                       </MenuItem>
                       <MenuItem to="/my-quizzes" icon={BookmarkCheck} onClick={() => setMenuOpen(false)}>
                         Мои квизови
@@ -207,7 +215,7 @@ export default function Header() {
             )}
 
             <button
-              onClick={() => setMobileOpen(!mobileOpen)}
+              onClick={openMobile}
               className="lg:hidden p-2 rounded-xl hover:bg-fg/5"
               aria-label="Меню"
             >

@@ -5,7 +5,7 @@ import {
   Trophy, Flame, Target, Award, BookOpen, Calendar, ArrowLeft,
   Lock, Clock, Check, Database, Download, Heart, FileText,
   UserPlus, UserCheck, UserMinus, X, Loader2, Bookmark,
-  MessageSquare,
+  MessageSquare, Pencil,
 } from 'lucide-react'
 import { authApi, materialsApi } from '../lib/api'
 import { useAuth } from '../lib/auth'
@@ -185,7 +185,7 @@ export default function UserProfile() {
                 </span>
               )}
               {stats.rank && stats.rank <= 100 && (
-                <span className="badge bg-white text-fg border-white">
+                <span className="badge bg-white text-ink-900 border-white">
                   <Trophy size={10} className="inline mr-1" /> #{stats.rank}
                 </span>
               )}
@@ -225,7 +225,7 @@ export default function UserProfile() {
             </div>
           </div>
 
-          {/* Friend + chat action buttons */}
+          {/* Friend + chat action buttons (other user) OR edit button (own profile) */}
           {me && me.id !== user.id && (
             <div className="shrink-0 flex flex-col gap-2">
               <FriendButton
@@ -242,6 +242,18 @@ export default function UserProfile() {
                   <MessageSquare size={14} /> Порака
                 </Link>
               )}
+            </div>
+          )}
+
+          {/* Own profile — Edit button */}
+          {me && me.id === user.id && (
+            <div className="shrink-0">
+              <Link
+                to={`/profile?return=/users/${user.id}`}
+                className="btn-secondary !bg-white/10 !text-white !border-white/20 hover:!bg-accent hover:!border-accent"
+              >
+                <Pencil size={14} /> Уреди профил
+              </Link>
             </div>
           )}
         </div>

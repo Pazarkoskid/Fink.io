@@ -23,13 +23,19 @@ export default function NotificationBell() {
   const [loading, setLoading] = useState(false)
   const ref = useRef(null)
 
-  // Close on outside click
+  // Close on outside click/tap
   useEffect(() => {
     const handler = (e) => {
       if (ref.current && !ref.current.contains(e.target)) setOpen(false)
     }
-    if (open) document.addEventListener('mousedown', handler)
-    return () => document.removeEventListener('mousedown', handler)
+    if (open) {
+      document.addEventListener('mousedown', handler)
+      document.addEventListener('touchstart', handler)
+    }
+    return () => {
+      document.removeEventListener('mousedown', handler)
+      document.removeEventListener('touchstart', handler)
+    }
   }, [open])
 
   // Poll count every 30s + listen for custom refresh events
@@ -107,13 +113,19 @@ export default function NotificationBell() {
       </button>
 
       {open && (
-        <div
-          className="absolute right-0 top-full mt-2 w-80 sm:w-96 rounded-2xl border border-border shadow-medium overflow-hidden animate-fade-in z-50"
-          style={{
-            backgroundColor: 'rgb(var(--surface))',
-            boxShadow: '0 12px 40px -8px rgb(var(--shadow) / 0.35)',
-          }}
-        >
+        <>
+          {/* Mobile backdrop (closes on tap) */}
+          <div
+            className="fixed inset-0 z-40 sm:hidden bg-black/20"
+            onClick={() => setOpen(false)}
+          />
+          <div
+            className="fixed sm:absolute left-2 right-2 sm:left-auto sm:right-0 top-16 sm:top-full sm:mt-2 sm:w-96 rounded-2xl border border-border shadow-medium overflow-hidden animate-fade-in z-50"
+            style={{
+              backgroundColor: 'rgb(var(--surface))',
+              boxShadow: '0 12px 40px -8px rgb(var(--shadow) / 0.35)',
+            }}
+          >
           <div className="px-4 py-3 border-b border-border flex items-center justify-between">
             <p className="font-display text-lg">Нотификации</p>
             {count > 0 && (
@@ -149,7 +161,8 @@ export default function NotificationBell() {
               </ul>
             )}
           </div>
-        </div>
+          </div>
+        </>
       )}
     </div>
   )

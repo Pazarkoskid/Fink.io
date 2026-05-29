@@ -70,7 +70,7 @@ export default function Footer() {
             © {new Date().getFullYear()} Fink.io. All rights reserved.
           </p>
           <p className="text-xs text-muted flex items-center gap-1.5">
-            Made with <Heart size={11} className="fill-accent text-accent" /> by{' '}
+            Made by{' '}
             <a
               href="https://pazarkoskid.github.io/portfolio/"
               target="_blank"
